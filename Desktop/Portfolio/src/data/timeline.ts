@@ -1,0 +1,50 @@
+import { TimelineMilestone } from '../types/portfolio';
+
+export const timelineData: TimelineMilestone[] = [
+  {
+    year: '2025 - Present',
+    title: 'Frontend Engineer',
+    company: 'CandorWorks',
+    role: 'Frontend Development & UI Optimization',
+    description: 'Developing responsive web platforms, assessment tools, and client-facing web dashboards at CandorWorks.',
+    impact: 'Built reusable React components, optimized data table fetching with debouncing and caching, and improved mobile layout consistency.',
+    metrics: ['Reduced Redundant API Requests', 'Built Modular UI Library', 'Faster Page Load Times'],
+    active: true,
+  },
+  {
+    year: '2025 Q3',
+    title: 'Data Import-Export Module',
+    company: 'CandorWorks',
+    role: 'Frontend Developer',
+    description: 'Designed and implemented a user-friendly CSV/JSON data upload and preview interface for large lead datasets.',
+    impact: 'Added client-side file validation and chunked parsing, preventing browser tab freezes when uploading multi-thousand row files.',
+    metrics: ['Smooth Large File Parsing', 'Zero Thread Lock', 'Clear Error Messages'],
+  },
+  {
+    year: '2025 Q1',
+    title: 'Candidate Assessment Platform',
+    company: 'CandorWorks',
+    role: 'Frontend Developer',
+    description: 'Developed key candidate test-taking user interface featuring timer controls, question navigation, and real-time autosave.',
+    impact: 'Shipped clean, responsive interfaces that ensured reliable candidate test submissions across desktop and mobile devices.',
+    metrics: ['Responsive UI across Devices', 'Reliable Autosave', 'High Candidate Completion'],
+  },
+  {
+    year: '2024 - 2025',
+    title: 'Reusable UI Component Library',
+    company: 'CandorWorks',
+    role: 'UI Developer',
+    description: 'Created a centralized collection of accessible, styled UI components using React, Tailwind CSS, and Radix primitives.',
+    impact: 'Standardized UI design across internal projects, saving development time when building new forms, tables, and modal dialogs.',
+    metrics: ['15+ Core UI Components', 'Consistent Styling', 'Improved Dev Speed'],
+  },
+  {
+    year: '2024',
+    title: 'Software Development Projects',
+    company: 'Engineering Projects',
+    role: 'Full-Stack Developer',
+    description: 'Built full-stack web applications combining React frontends with Java Spring Boot backend services and MySQL databases.',
+    impact: 'Successfully created Fresh Bites food ordering app and Secure E-Voting portal with clean user interfaces and secure data handling.',
+    metrics: ['Clean React Architecture', 'RESTful API Integration', 'Responsive Design'],
+  },
+];
