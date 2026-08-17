@@ -13,6 +13,7 @@ import { TestimonialsPlaceholder } from './components/testimonials/TestimonialsP
 import { TagCloud } from './components/tags/TagCloud';
 import { HireMeFlow } from './components/process/HireMeFlow';
 import { ContactControlPanel } from './components/contact/ContactControlPanel';
+import { AIChatbot } from './components/chatbot/AIChatbot';
 
 export function App() {
   return (
@@ -30,6 +31,7 @@ export function App() {
       <TagCloud />
       <HireMeFlow />
       <ContactControlPanel />
+      <AIChatbot />
     </PageShell>
   );
 }
