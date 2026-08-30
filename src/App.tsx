@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageShell } from './components/layout/PageShell';
 import { HeroSection } from './components/hero/HeroSection';
+import { LiveResumeSection } from './components/resume/LiveResumeSection';
 import { TerminalBoot } from './components/terminal/TerminalBoot';
 import { InteractiveRoadmap } from './components/roadmap/InteractiveRoadmap';
 import { PerformanceDashboard } from './components/dashboard/PerformanceDashboard';
@@ -18,6 +19,7 @@ export function App() {
   return (
     <PageShell>
       <HeroSection />
+      <LiveResumeSection />
       <TerminalBoot />
       <InteractiveRoadmap />
       <PerformanceDashboard />

@@ -4,10 +4,14 @@ import { Badge } from '../ui/Badge';
 import { MagneticButton } from '../ui/MagneticButton';
 import { RotatingRoleText } from './RotatingRoleText';
 import { Hero3DScene } from './Hero3DScene';
-import { ArrowDown, ArrowRight, Download, FileText } from 'lucide-react';
+import { ArrowDown, ArrowRight, Download, Sparkles, FileText } from 'lucide-react';
 import { fadeInUp, staggerContainer, lineReveal } from '../../lib/motion-variants';
+import { useAiModal } from '../../context/AiModalContext';
+import { useLiveResume } from '../../context/LiveResumeContext';
 
 export const HeroSection: React.FC = () => {
+  const { openModal } = useAiModal();
+  const { openLiveResume } = useLiveResume();
   return (
     <section
       id="hero"
@@ -63,6 +67,22 @@ export const HeroSection: React.FC = () => {
           <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2">
             <MagneticButton
               variant="accent"
+              onClick={() => openLiveResume()}
+            >
+              <FileText className="w-4 h-4 text-emerald-400" />
+              <span>View Live Resume</span>
+            </MagneticButton>
+
+            <MagneticButton
+              variant="glass"
+              onClick={() => openModal()}
+            >
+              <Sparkles className="w-4 h-4 text-[#38BDF8] animate-pulse" />
+              <span>Ask AI About Me</span>
+            </MagneticButton>
+
+            <MagneticButton
+              variant="glass"
               onClick={() => {
                 const element = document.getElementById('projects');
                 element?.scrollIntoView({ behavior: 'smooth' });
@@ -79,7 +99,7 @@ export const HeroSection: React.FC = () => {
               target="_blank"
             >
               <Download className="w-4 h-4 text-[#4F8CFF]" />
-              <span>Download Resume</span>
+              <span>Download PDF</span>
             </MagneticButton>
           </motion.div>
         </motion.div>
@@ -88,19 +108,19 @@ export const HeroSection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 relative flex justify-center items-center"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="lg:col-span-5 h-[400px] sm:h-[480px] lg:h-[520px] w-full relative"
         >
           <Hero3DScene />
         </motion.div>
       </div>
 
-      {/* Scroll indicator down */}
+      {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-xs font-mono text-[#8A8A8E]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs font-mono text-[#8A8A8E]"
       >
         <span className="uppercase tracking-widest text-[10px]">Scroll to explore</span>
         <motion.div
