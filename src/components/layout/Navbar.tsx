@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SIGNATURE_EASE } from '../../lib/utils';
 import { ThemeToggle } from '../ui/ThemeToggle';
-import { useAiModal } from '../../context/AiModalContext';
 import { useLiveResume } from '../../context/LiveResumeContext';
 import {
   Home,
@@ -35,7 +34,6 @@ const navItems = [
 ];
 
 export const Navbar: React.FC = () => {
-  const { openModal } = useAiModal();
   const { openLiveResume } = useLiveResume();
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -151,14 +149,6 @@ export const Navbar: React.FC = () => {
                 <span>Live Resume</span>
               </button>
 
-              <button
-                onClick={() => openModal()}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#4F8CFF]/20 hover:bg-[#4F8CFF]/30 border border-[#4F8CFF]/50 text-xs font-semibold text-white shadow-[0_0_12px_rgba(79,140,255,0.3)] transition-all cursor-pointer"
-                title="Ask AI about Guruvishnu (Ctrl+K)"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-[#38BDF8] animate-pulse" />
-                <span>Ask AI</span>
-              </button>
               <ThemeToggle />
             </div>
           </nav>
@@ -207,15 +197,6 @@ export const Navbar: React.FC = () => {
                   title="View Live Resume"
                 >
                   <FileText className="w-4 h-4" />
-                </button>
-
-                {/* AI Trigger */}
-                <button
-                  onClick={() => openModal()}
-                  className="p-2 rounded-full bg-[#4F8CFF]/20 border border-[#4F8CFF]/50 text-[#38BDF8] hover:bg-[#4F8CFF]/30 transition-colors cursor-pointer"
-                  title="Ask AI"
-                >
-                  <Sparkles className="w-4 h-4 animate-pulse" />
                 </button>
 
                 {/* Theme Toggle Button */}

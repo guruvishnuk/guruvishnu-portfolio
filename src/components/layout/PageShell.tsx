@@ -6,10 +6,7 @@ import { ScrollProgress } from '../ui/ScrollProgress';
 import { LoadingScreen } from '../ui/LoadingScreen';
 import { useLenis } from '../../hooks/useLenis';
 import { ThemeProvider } from '../../context/ThemeContext';
-import { AiModalProvider } from '../../context/AiModalContext';
 import { LiveResumeProvider } from '../../context/LiveResumeContext';
-import { ChatModal } from '../chat/ChatModal';
-import { AiFloatingButton } from '../ai/AiFloatingButton';
 import { LiveResumeModal } from '../resume/LiveResumeModal';
 
 interface PageShellProps {
@@ -28,8 +25,6 @@ export const PageShellContent: React.FC<PageShellProps> = ({ children }) => {
       <Navbar />
       <main className="relative z-10">{children}</main>
       <Footer />
-      <AiFloatingButton />
-      <ChatModal />
       <LiveResumeModal />
     </div>
   );
@@ -38,11 +33,9 @@ export const PageShellContent: React.FC<PageShellProps> = ({ children }) => {
 export const PageShell: React.FC<PageShellProps> = ({ children }) => {
   return (
     <ThemeProvider>
-      <AiModalProvider>
-        <LiveResumeProvider>
-          <PageShellContent>{children}</PageShellContent>
-        </LiveResumeProvider>
-      </AiModalProvider>
+      <LiveResumeProvider>
+        <PageShellContent>{children}</PageShellContent>
+      </LiveResumeProvider>
     </ThemeProvider>
   );
 };

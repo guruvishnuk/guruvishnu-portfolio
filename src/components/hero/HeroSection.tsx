@@ -6,11 +6,9 @@ import { RotatingRoleText } from './RotatingRoleText';
 import { Hero3DScene } from './Hero3DScene';
 import { ArrowDown, ArrowRight, Download, Sparkles, FileText } from 'lucide-react';
 import { fadeInUp, staggerContainer, lineReveal } from '../../lib/motion-variants';
-import { useAiModal } from '../../context/AiModalContext';
 import { useLiveResume } from '../../context/LiveResumeContext';
 
 export const HeroSection: React.FC = () => {
-  const { openModal } = useAiModal();
   const { openLiveResume } = useLiveResume();
   return (
     <section
@@ -71,14 +69,6 @@ export const HeroSection: React.FC = () => {
             >
               <FileText className="w-4 h-4 text-emerald-400" />
               <span>View Live Resume</span>
-            </MagneticButton>
-
-            <MagneticButton
-              variant="glass"
-              onClick={() => openModal()}
-            >
-              <Sparkles className="w-4 h-4 text-[#38BDF8] animate-pulse" />
-              <span>Ask AI About Me</span>
             </MagneticButton>
 
             <MagneticButton

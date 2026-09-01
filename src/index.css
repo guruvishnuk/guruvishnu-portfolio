@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #050505;
-  --color-bg-elevated: #0a0a0c;
+  --color-bg: var(--theme-bg);
+  --color-bg-elevated: var(--theme-bg-elevated);
+  --color-text-primary: var(--theme-text-primary);
+  --color-text-secondary: var(--theme-text-secondary);
+  --color-border: var(--theme-border);
+
   --color-accent: #4F8CFF;
   --color-accent-soft: rgba(79, 140, 255, 0.1);
-  --color-text-primary: #F5F5F7;
-  --color-text-secondary: #8A8A8E;
-  --color-border: rgba(255, 255, 255, 0.08);
   --radius-card: 1.25rem;
   --font-display: "Geist", "Inter", ui-sans-serif, system-ui;
   --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
@@ -19,15 +20,39 @@
     box-sizing: border-box;
   }
   
-  html {
+  :root {
+    --theme-bg: #FFFFFF;
+    --theme-bg-elevated: #F9F9FA;
+    --theme-text-primary: #1A1A1C;
+    --theme-text-secondary: #6B7280;
+    --theme-border: rgba(0, 0, 0, 0.1);
+    --glass-bg: rgba(0, 0, 0, 0.03);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-pill-bg: rgba(0, 0, 0, 0.05);
+    color-scheme: light;
+  }
+
+  .dark {
+    --theme-bg: #050505;
+    --theme-bg-elevated: #0a0a0c;
+    --theme-text-primary: #F5F5F7;
+    --theme-text-secondary: #8A8A8E;
+    --theme-border: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-pill-bg: rgba(255, 255, 255, 0.05);
     color-scheme: dark;
-    background-color: var(--color-bg);
-    color: var(--color-text-primary);
+  }
+
+  html {
+    background-color: var(--theme-bg);
+    color: var(--theme-text-primary);
     font-family: var(--font-display);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   body {
-    background-color: var(--color-bg);
+    background-color: var(--theme-bg);
     overflow-x: hidden;
   }
 
@@ -36,26 +61,30 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #050505;
+    background: var(--theme-bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--theme-border);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #4F8CFF;
+    background: var(--color-accent);
   }
 }
 
 /* Glassmorphism Utilities */
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-card);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.dark .glass-card {
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-  border-radius: 1.25rem;
-  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
@@ -63,19 +92,20 @@
 }
 
 .glass-card-sm {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
   border-radius: 0.75rem;
 }
 
 .glass-pill {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-pill-bg);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--glass-border);
   border-radius: 9999px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-pill:hover {
@@ -89,13 +119,13 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F7 40%, #8A8A8E 100%);
+  background: linear-gradient(135deg, var(--theme-text-primary) 0%, var(--theme-text-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-accent-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #4F8CFF 70%, #2563EB 100%);
+  background: linear-gradient(135deg, var(--theme-text-primary) 0%, #4F8CFF 70%, #2563EB 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
