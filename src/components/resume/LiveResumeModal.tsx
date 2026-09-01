@@ -36,22 +36,22 @@ export const LiveResumeModal: React.FC = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-5xl max-h-[92vh] flex flex-col bg-[#05070A] border border-white/15 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden z-10"
+            className="relative w-full max-w-5xl max-h-[92vh] flex flex-col bg-[var(--theme-bg)] border border-[var(--glass-border)] rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden z-10"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0D1117]/80 backdrop-blur-xl shrink-0">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--glass-border)] bg-[var(--theme-bg-elevated)] backdrop-blur-xl shrink-0">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-xl bg-[#4F8CFF]/20 border border-[#4F8CFF]/40 text-[#4F8CFF]">
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                  <h3 className="text-base sm:text-lg font-bold text-[var(--theme-text-primary)] flex items-center gap-2">
                     <span>Live Interactive Resume</span>
                     <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#4F8CFF]/20 border border-[#4F8CFF]/50 text-[#38BDF8]">
                       <Sparkles className="w-3 h-3 animate-pulse" /> Official PDF Model
                     </span>
                   </h3>
-                  <p className="text-xs text-[#8A8A8E]">
+                  <p className="text-xs text-[var(--theme-text-secondary)]">
                     Guruvishnu B Kajagar — Frontend Developer / React Specialist
                   </p>
                 </div>
@@ -59,7 +59,7 @@ export const LiveResumeModal: React.FC = () => {
 
               <button
                 onClick={closeLiveResume}
-                className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-[#8A8A8E] hover:text-white transition-colors cursor-pointer"
+                className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/15 text-[var(--theme-text-secondary)] hover:text-[var(--theme-text-primary)] transition-colors cursor-pointer"
                 aria-label="Close Live Resume"
               >
                 <X className="w-5 h-5" />
