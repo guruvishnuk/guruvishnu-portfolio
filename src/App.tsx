@@ -19,7 +19,6 @@ export function App() {
   return (
     <PageShell>
       <HeroSection />
-      <LiveResumeSection />
       <TerminalBoot />
       <InteractiveRoadmap />
       <PerformanceDashboard />
@@ -32,6 +31,7 @@ export function App() {
       <TagCloud />
       <HireMeFlow />
       <ContactControlPanel />
+      <LiveResumeSection />
     </PageShell>
   );
 }
