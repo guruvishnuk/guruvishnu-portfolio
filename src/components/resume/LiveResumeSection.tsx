@@ -12,10 +12,10 @@ export const LiveResumeSection: React.FC = () => {
           <Sparkles className="w-3.5 h-3.5 text-[#38BDF8] inline mr-1" />
           Interactive Resume Engine
         </Badge>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--theme-text-primary)]">
           Live Production Resume
         </h2>
-        <p className="text-[#8A8A8E] text-base sm:text-lg">
+        <p className="text-[var(--theme-text-secondary)] text-base sm:text-lg">
           Inspect, copy, or print the exact production resume document for Guruvishnu B Kajagar.
         </p>
       </div>
