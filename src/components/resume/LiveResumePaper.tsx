@@ -73,13 +73,13 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
     <div className="w-full flex flex-col items-center">
       {/* Top Floating Control Bar */}
       {showControls && (
-        <div className="w-full max-w-4xl mb-4 p-3 rounded-2xl glass-card border border-white/15 bg-[#0D1117]/90 backdrop-blur-xl flex flex-wrap items-center justify-between gap-3 shadow-xl print:hidden">
+        <div className="w-full max-w-4xl mb-4 p-3 rounded-2xl glass-card flex flex-wrap items-center justify-between gap-3 shadow-xl print:hidden">
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#4F8CFF]/20 border border-[#4F8CFF]/50 text-xs font-mono font-semibold text-[#4F8CFF]">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               LIVE RESUME DOCUMENT
             </span>
-            <span className="hidden sm:inline text-xs text-[#8A8A8E]">
+            <span className="hidden sm:inline text-xs text-[var(--theme-text-secondary)]">
               Updated for 2026 Production Standards
             </span>
           </div>
@@ -87,10 +87,10 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopyText}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-medium text-white transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/15 border border-black/10 dark:border-white/10 text-xs font-medium text-black dark:text-white transition-all cursor-pointer"
               title="Copy plain text resume to clipboard"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-[#38BDF8]" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#38BDF8]" />}
               <span>{copied ? 'Copied!' : 'Copy Text'}</span>
             </button>
 
@@ -106,7 +106,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
             {onClose && (
               <button
                 onClick={onClose}
-                className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-red-500/20 hover:text-red-400 text-xs font-medium text-[#8A8A8E] border border-white/10 transition-all cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/10 hover:bg-red-500/20 hover:text-red-500 dark:hover:text-red-400 text-xs font-medium text-[var(--theme-text-secondary)] border border-black/10 dark:border-white/10 transition-all cursor-pointer"
               >
                 Close
               </button>
