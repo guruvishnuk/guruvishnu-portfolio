@@ -3,11 +3,15 @@ import { motion } from 'motion/react';
 import { GlassCard } from '../ui/GlassCard';
 import { Badge } from '../ui/Badge';
 import { ContributionHeatmap } from './ContributionHeatmap';
-import { githubData } from '../../data/github';
-import { Github, GitCommit, FolderGit2, Code, ArrowUpRight } from 'lucide-react';
+import { githubData as staticGithubData } from '../../data/github';
+import { useGithubStats } from '../../hooks/useGithubStats';
+import { Github, GitCommit, FolderGit2, Code, ArrowUpRight, Loader2 } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../../lib/motion-variants';
 
 export const GithubDashboard: React.FC = () => {
+  const { stats, loading } = useGithubStats();
+  const githubData = stats || staticGithubData;
+
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -22,14 +26,14 @@ export const GithubDashboard: React.FC = () => {
         </div>
 
         <a
-          href={`https://github.com/${githubData.username}`}
+          href={`https://github.com/guruvishnuk`}
           target="_blank"
           rel="noopener noreferrer"
           className="glass-pill px-4 py-2 flex items-center gap-2 text-xs font-mono text-[#F5F5F7] hover:text-[#4F8CFF] transition-colors self-start md:self-auto"
           data-cursor="hover"
         >
           <Github className="w-4 h-4 text-[#4F8CFF]" />
-          <span>@{githubData.username}</span>
+          <span>@guruvishnuk</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
       </div>
@@ -43,7 +47,8 @@ export const GithubDashboard: React.FC = () => {
       >
         {/* Metric Cards Top Row */}
         <motion.div variants={fadeInUp} className="lg:col-span-4">
-          <GlassCard className="p-6 h-full flex flex-col justify-between space-y-4">
+          <GlassCard className="p-6 h-full flex flex-col justify-between space-y-4 relative">
+            {loading && <div className="absolute top-4 right-4"><Loader2 className="w-4 h-4 text-[#8A8A8E] animate-spin" /></div>}
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono text-[#8A8A8E] uppercase">Total Repositories</span>
               <FolderGit2 className="w-5 h-5 text-[#4F8CFF]" />
@@ -56,7 +61,7 @@ export const GithubDashboard: React.FC = () => {
         </motion.div>
 
         <motion.div variants={fadeInUp} className="lg:col-span-4">
-          <GlassCard className="p-6 h-full flex flex-col justify-between space-y-4">
+          <GlassCard className="p-6 h-full flex flex-col justify-between space-y-4 relative">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono text-[#8A8A8E] uppercase">Annual Commits</span>
               <GitCommit className="w-5 h-5 text-emerald-400" />
@@ -70,7 +75,8 @@ export const GithubDashboard: React.FC = () => {
 
         {/* Top Languages Card */}
         <motion.div variants={fadeInUp} className="lg:col-span-4">
-          <GlassCard className="p-6 h-full space-y-4">
+          <GlassCard className="p-6 h-full space-y-4 relative">
+            {loading && <div className="absolute top-4 right-4"><Loader2 className="w-4 h-4 text-[#8A8A8E] animate-spin" /></div>}
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono text-[#8A8A8E] uppercase">Language Distribution</span>
               <Code className="w-5 h-5 text-purple-400" />
@@ -104,7 +110,8 @@ export const GithubDashboard: React.FC = () => {
 
         {/* Latest Commits Feed */}
         <motion.div variants={fadeInUp} className="lg:col-span-12">
-          <GlassCard className="p-6 md:p-8 space-y-4">
+          <GlassCard className="p-6 md:p-8 space-y-4 relative">
+            {loading && <div className="absolute top-4 right-4"><Loader2 className="w-4 h-4 text-[#8A8A8E] animate-spin" /></div>}
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <span className="text-xs font-mono text-[#8A8A8E] uppercase flex items-center gap-2">
                 <GitCommit className="w-4 h-4 text-[#4F8CFF]" />
