@@ -31,29 +31,31 @@ export const ContactForm: React.FC = () => {
   const onSubmit = async (data: ContactFormData) => {
     setSubmitError(null);
     try {
-      // 1. Try sending via Formspree or custom API if VITE_FORMSPREE_ID or VITE_CONTACT_ENDPOINT is defined
-      const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT || (import.meta.env.VITE_FORMSPREE_ID ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}` : null);
+      // Use Web3Forms or Formspree
+      const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || import.meta.env.VITE_CONTACT_API_KEY;
+      const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ID ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}` : null;
+      
+      const endpoint = accessKey ? 'https://api.web3forms.com/submit' : formspreeEndpoint;
 
       if (endpoint) {
+        const payload = accessKey 
+          ? { access_key: accessKey, ...data } 
+          : { name: data.name, email: data.email, company: data.company || 'N/A', message: data.message };
+
         const response = await fetch(endpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          body: JSON.stringify({
-            name: data.name,
-            email: data.email,
-            company: data.company || 'N/A',
-            message: data.message,
-          }),
+          body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
           throw new Error('Failed to send via serverless endpoint.');
         }
       } else {
-        // 2. Direct Mailto Fallback: Launch pre-filled email client to deliver to guruvishnukajagar@gmail.com
+        // Fallback to Mailto
         const subject = encodeURIComponent(`Portfolio Contact: ${data.name}${data.company ? ` from ${data.company}` : ''}`);
         const body = encodeURIComponent(
           `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || 'N/A'}\n\nMessage:\n${data.message}`
@@ -65,7 +67,7 @@ export const ContactForm: React.FC = () => {
       reset();
     } catch (err) {
       console.error('Contact form submission error:', err);
-      // Even if fetch fails, fallback to mailto link so user message is never lost
+      // Fallback
       const subject = encodeURIComponent(`Portfolio Inquiry from ${data.name}`);
       const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
       window.location.href = `mailto:guruvishnukajagar@gmail.com?subject=${subject}&body=${body}`;
@@ -84,7 +86,7 @@ export const ContactForm: React.FC = () => {
         <CheckCircle className="w-12 h-12 text-emerald-400 mx-auto" />
         <h4 className="text-xl font-bold text-white">Message Dispatched!</h4>
         <p className="text-sm text-[#8A8A8E]">
-          Thank you for reaching out! Your message has been prepared for delivery to{' '}
+          Thank you for reaching out! Your message has been sent to{' '}
           <strong className="text-[#F5F5F7]">guruvishnukajagar@gmail.com</strong>.
         </p>
         <button
