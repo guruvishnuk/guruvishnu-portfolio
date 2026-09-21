@@ -14,6 +14,7 @@ import { TestimonialsPlaceholder } from './components/testimonials/TestimonialsP
 import { TagCloud } from './components/tags/TagCloud';
 import { HireMeFlow } from './components/process/HireMeFlow';
 import { ContactControlPanel } from './components/contact/ContactControlPanel';
+import { AIChatWidget } from './components/ui/AIChatWidget';
 
 export function App() {
   return (
@@ -32,6 +33,9 @@ export function App() {
       <HireMeFlow />
       <ContactControlPanel />
       <LiveResumeSection />
+      
+      {/* Global AI Chat Widget */}
+      <AIChatWidget />
     </PageShell>
   );
 }
