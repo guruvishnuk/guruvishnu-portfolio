@@ -12,7 +12,7 @@ export const BlogSection: React.FC = () => {
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="space-y-4 max-w-2xl mb-16">
-        <Badge variant="glow">Writing & Insights</Badge>
+        <Badge variant="pulse">Writing & Insights</Badge>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
           Latest Articles
         </h2>
