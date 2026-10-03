@@ -13,7 +13,7 @@ export const ContactControlPanel: React.FC = () => {
           Initiate Contact
         </h2>
         <p className="text-[#8A8A8E] text-base md:text-lg">
-          Available for senior frontend roles, technical consultation, and architectural engagements.
+          Available for junior frontend roles, technical consultation, and architectural engagements.
         </p>
       </div>
 
