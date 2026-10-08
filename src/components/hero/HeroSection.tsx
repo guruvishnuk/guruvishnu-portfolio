@@ -91,6 +91,14 @@ export const HeroSection: React.FC = () => {
               <Download className="w-4 h-4 text-[#4F8CFF]" />
               <span>Download PDF</span>
             </MagneticButton>
+
+            <MagneticButton
+              variant="glass"
+              onClick={() => window.dispatchEvent(new Event('open-tour-guide'))}
+            >
+              <Sparkles className="w-4 h-4 text-purple-400" />
+              <span>Portfolio Tour</span>
+            </MagneticButton>
           </motion.div>
         </motion.div>
 

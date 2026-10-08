@@ -15,7 +15,7 @@ import { TagCloud } from './components/tags/TagCloud';
 import { HireMeFlow } from './components/process/HireMeFlow';
 import { ContactControlPanel } from './components/contact/ContactControlPanel';
 import { AIChatWidget } from './components/ui/AIChatWidget';
-
+import { WelcomeGuide } from './components/guide/WelcomeGuide';
 export function App() {
   return (
     <PageShell>
@@ -36,6 +36,9 @@ export function App() {
       
       {/* Global AI Chat Widget */}
       <AIChatWidget />
+      
+      {/* Welcome Onboarding Guide */}
+      <WelcomeGuide />
     </PageShell>
   );
 }
