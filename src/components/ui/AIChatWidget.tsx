@@ -73,7 +73,7 @@ export const AIChatWidget: React.FC = () => {
               onClick={() => setIsOpen(true)}
               className="w-14 h-14 rounded-full bg-[#4F8CFF] text-white shadow-lg flex items-center justify-center relative group"
             >
-              <ContextualHint id="chat-hint" text="Ask me anything!" position="top" delay={3000} />
+              <ContextualHint id="chat-hint" text="Ask me anything!" position="top" delay={1000} />
               <Bot className="w-6 h-6" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-[#0a0a0c]"></span>
             </motion.button>

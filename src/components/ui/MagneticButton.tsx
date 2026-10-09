@@ -43,7 +43,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   };
 
   const baseStyles =
-    'relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full font-medium text-sm transition-all duration-300 overflow-hidden cursor-pointer select-none';
+    'relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full font-medium text-sm transition-all duration-300 cursor-pointer select-none';
 
   const variants = {
     accent:

@@ -63,14 +63,14 @@ export const HeroSection: React.FC = () => {
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2 relative">
+          <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2 relative z-50">
             <MagneticButton
               variant="accent"
               onClick={() => openLiveResume()}
             >
               <FileText className="w-4 h-4 text-emerald-400" />
               <span>View Live Resume</span>
-              <ContextualHint id="resume-hint" text="Start here! See my data instantly." position="bottom" delay={1500} />
+              <ContextualHint id="resume-hint" text="Start here! See my data instantly." position="bottom" delay={500} />
             </MagneticButton>
 
             <MagneticButton
