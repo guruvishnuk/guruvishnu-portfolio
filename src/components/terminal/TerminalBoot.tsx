@@ -26,7 +26,7 @@ export const TerminalBoot: React.FC = () => {
   );
 
   return (
-    <section className="py-16 px-6 max-w-5xl mx-auto" ref={containerRef}>
+    <section id="terminal-boot" className="py-16 px-6 max-w-5xl mx-auto" ref={containerRef}>
       <GlassCard className="p-0 border-white/15 bg-[#0a0a0c]/90 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
         {/* macOS Traffic light header */}
         <div className="flex items-center justify-between px-4 py-3 bg-white/[0.04] border-b border-white/10">
