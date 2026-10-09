@@ -7,6 +7,7 @@ import { Hero3DScene } from './Hero3DScene';
 import { ArrowDown, ArrowRight, Download, Sparkles, FileText } from 'lucide-react';
 import { fadeInUp, staggerContainer, lineReveal } from '../../lib/motion-variants';
 import { useLiveResume } from '../../context/LiveResumeContext';
+import { ContextualHint } from '../ui/ContextualHint';
 
 export const HeroSection: React.FC = () => {
   const { openLiveResume } = useLiveResume();
@@ -62,13 +63,14 @@ export const HeroSection: React.FC = () => {
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2">
+          <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2 relative">
             <MagneticButton
               variant="accent"
               onClick={() => openLiveResume()}
             >
               <FileText className="w-4 h-4 text-emerald-400" />
               <span>View Live Resume</span>
+              <ContextualHint id="resume-hint" text="Start here! See my data instantly." position="bottom" delay={1500} />
             </MagneticButton>
 
             <MagneticButton
@@ -90,14 +92,6 @@ export const HeroSection: React.FC = () => {
             >
               <Download className="w-4 h-4 text-[#4F8CFF]" />
               <span>Download PDF</span>
-            </MagneticButton>
-
-            <MagneticButton
-              variant="glass"
-              onClick={() => window.dispatchEvent(new Event('open-tour-guide'))}
-            >
-              <Sparkles className="w-4 h-4 text-purple-400" />
-              <span>Portfolio Tour</span>
             </MagneticButton>
           </motion.div>
         </motion.div>

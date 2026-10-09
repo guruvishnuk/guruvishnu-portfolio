@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Bot, X, Send, User, Sparkles } from 'lucide-react';
 import { generateResumeResponse, ChatMessage } from '../../services/aiService';
+import { ContextualHint } from './ContextualHint';
 
 export const AIChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,25 +21,6 @@ export const AIChatWidget: React.FC = () => {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  useEffect(() => {
-    // Open chat automatically as the user guide for first-time visitors
-    const hasSeenGuide = localStorage.getItem('portfolio-chat-guide');
-    if (!hasSeenGuide) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-        localStorage.setItem('portfolio-chat-guide', 'true');
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Also support manual trigger from Hero button
-    const handleOpen = () => setIsOpen(true);
-    window.addEventListener('open-tour-guide', handleOpen);
-    return () => window.removeEventListener('open-tour-guide', handleOpen);
-  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -91,6 +73,7 @@ export const AIChatWidget: React.FC = () => {
               onClick={() => setIsOpen(true)}
               className="w-14 h-14 rounded-full bg-[#4F8CFF] text-white shadow-lg flex items-center justify-center relative group"
             >
+              <ContextualHint id="chat-hint" text="Ask me anything!" position="top" delay={3000} />
               <Bot className="w-6 h-6" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-[#0a0a0c]"></span>
             </motion.button>
