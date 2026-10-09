@@ -15,7 +15,6 @@ import { TagCloud } from './components/tags/TagCloud';
 import { HireMeFlow } from './components/process/HireMeFlow';
 import { ContactControlPanel } from './components/contact/ContactControlPanel';
 import { AIChatWidget } from './components/ui/AIChatWidget';
-import { TourGuide } from './components/guide/TourGuide';
 
 export function App() {
   return (
@@ -35,11 +34,8 @@ export function App() {
       <ContactControlPanel />
       <LiveResumeSection />
       
-      {/* Global AI Chat Widget */}
+      {/* Global AI Chat Widget (Acts as guide) */}
       <AIChatWidget />
-      
-      {/* Interactive Page Tour */}
-      <TourGuide />
     </PageShell>
   );
 }

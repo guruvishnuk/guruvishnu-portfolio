@@ -9,7 +9,7 @@ export const AIChatWidget: React.FC = () => {
     {
       id: 'init',
       sender: 'ai',
-      text: "Hi! I'm Guruvishnu's AI Assistant. Ask me anything about his experience, projects, or skills!",
+      text: "👋 Welcome to my portfolio! Here is a quick guide to what you'll find:\n\n• 📄 **Live Resume:** My professional data loaded dynamically.\n• 💻 **Terminal Boot:** A showcase of my core tech stack.\n• 🗺️ **Roadmap:** My career journey and impact.\n• 🚀 **Projects:** Deep dives into my production apps.\n\nFeel free to ask me any questions about Guruvishnu's experience!",
       timestamp: new Date().toISOString()
     }
   ]);
@@ -20,6 +20,25 @@ export const AIChatWidget: React.FC = () => {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    // Open chat automatically as the user guide for first-time visitors
+    const hasSeenGuide = localStorage.getItem('portfolio-chat-guide');
+    if (!hasSeenGuide) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        localStorage.setItem('portfolio-chat-guide', 'true');
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Also support manual trigger from Hero button
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('open-tour-guide', handleOpen);
+    return () => window.removeEventListener('open-tour-guide', handleOpen);
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -121,7 +140,12 @@ export const AIChatWidget: React.FC = () => {
                         ? 'bg-[#4F8CFF] text-white rounded-tr-sm' 
                         : 'bg-black/5 dark:bg-white/5 text-[var(--theme-text-primary)] rounded-tl-sm border border-[var(--glass-border)]'
                     }`}>
-                      {msg.text}
+                      {msg.text.split(/(\*\*.*?\*\*)/g).map((part, j) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                          return <strong key={j} className="font-bold text-[var(--theme-text-primary)]">{part.slice(2, -2)}</strong>;
+                        }
+                        return <span key={j} className="whitespace-pre-wrap">{part}</span>;
+                      })}
                     </div>
                   </div>
                 ))}
