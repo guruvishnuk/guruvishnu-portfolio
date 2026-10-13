@@ -10,7 +10,7 @@ export const BlogSection: React.FC = () => {
   const { posts, loading } = useDevto();
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto relative">
+    <section id="blog" className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="space-y-4 max-w-2xl mb-16">
         <Badge variant="pulse">Writing & Insights</Badge>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
@@ -24,6 +24,20 @@ export const BlogSection: React.FC = () => {
       {loading ? (
         <div className="flex justify-center py-12">
           <Loader2 className="w-8 h-8 text-[#4F8CFF] animate-spin" />
+        </div>
+      ) : posts.length === 0 ? (
+        <div className="text-center py-12 p-8 rounded-2xl glass-card border-white/10 max-w-md mx-auto space-y-3">
+          <BookOpen className="w-8 h-8 text-[#4F8CFF] mx-auto opacity-70" />
+          <p className="text-sm text-[#8A8A8E]">New engineering articles are currently in draft.</p>
+          <a
+            href="https://dev.to/guruvishnuk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs text-[#4F8CFF] hover:underline"
+          >
+            <span>Follow on Dev.to</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
       ) : (
         <motion.div

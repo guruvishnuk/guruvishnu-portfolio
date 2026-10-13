@@ -13,7 +13,7 @@ export const GithubDashboard: React.FC = () => {
   const githubData = stats || staticGithubData;
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto relative">
+    <section id="github" className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div className="space-y-4 max-w-2xl">
           <Badge variant="pulse">Developer Activity</Badge>

@@ -19,7 +19,7 @@ export const HireMeFlow: React.FC = () => {
   const [activeStep, setActiveStep] = useState(1);
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto relative">
+    <section id="services" className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Badge variant="pulse">Structured Workflow</Badge>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
