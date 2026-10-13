@@ -26,14 +26,20 @@ export const AIChatWidget: React.FC = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  const QUICK_PROMPTS = [
+    'Tech Stack',
+    'Featured Projects',
+    'CandorWorks Experience',
+    'Contact Info'
+  ];
+
+  const submitQuery = async (queryText: string) => {
+    if (!queryText.trim() || isTyping) return;
 
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
       sender: 'user',
-      text: input,
+      text: queryText,
       timestamp: new Date().toISOString()
     };
 
@@ -57,6 +63,11 @@ export const AIChatWidget: React.FC = () => {
     } finally {
       setIsTyping(false);
     }
+  };
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await submitQuery(input);
   };
 
   return (
@@ -112,13 +123,13 @@ export const AIChatWidget: React.FC = () => {
               {/* Chat Area */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {messages.map((msg) => (
-                  <div key={msg.id} className={`flex gap-2 \${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 \${
+                  <div key={msg.id} className={`flex gap-2 ${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
                       msg.sender === 'user' ? 'bg-[#4F8CFF]' : 'bg-white/10 dark:bg-white/10'
                     }`}>
                       {msg.sender === 'user' ? <User className="w-3 h-3 text-white" /> : <Bot className="w-3 h-3 text-[var(--theme-text-primary)]" />}
                     </div>
-                    <div className={`max-w-[75%] p-3 rounded-2xl text-xs leading-relaxed \${
+                    <div className={`max-w-[75%] p-3 rounded-2xl text-xs leading-relaxed ${
                       msg.sender === 'user' 
                         ? 'bg-[#4F8CFF] text-white rounded-tr-sm' 
                         : 'bg-black/5 dark:bg-white/5 text-[var(--theme-text-primary)] rounded-tl-sm border border-[var(--glass-border)]'
@@ -147,6 +158,21 @@ export const AIChatWidget: React.FC = () => {
                 <div ref={messagesEndRef} />
               </div>
 
+              {/* Quick Prompts */}
+              <div className="px-3 py-2 border-t border-[var(--glass-border)]/50 bg-[var(--theme-bg-elevated)]/50 flex gap-1.5 overflow-x-auto scrollbar-none">
+                {QUICK_PROMPTS.map((prompt) => (
+                  <button
+                    key={prompt}
+                    type="button"
+                    onClick={() => submitQuery(prompt)}
+                    disabled={isTyping}
+                    className="px-2.5 py-1 text-[11px] font-medium whitespace-nowrap rounded-lg bg-[#4F8CFF]/10 text-[#4F8CFF] hover:bg-[#4F8CFF]/20 border border-[#4F8CFF]/20 transition-all cursor-pointer disabled:opacity-50"
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+
               {/* Input Area */}
               <div className="p-3 border-t border-[var(--glass-border)] bg-[var(--theme-bg)]">
                 <form onSubmit={handleSend} className="flex gap-2 relative">
@@ -160,7 +186,7 @@ export const AIChatWidget: React.FC = () => {
                   <button 
                     type="submit"
                     disabled={!input.trim() || isTyping}
-                    className="w-8 h-8 rounded-lg bg-[#4F8CFF] text-white flex items-center justify-center hover:bg-[#3b6ecc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed absolute right-1 top-1"
+                    className="w-8 h-8 rounded-lg bg-[#4F8CFF] text-white flex items-center justify-center hover:bg-[#3b6ecc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed absolute right-1 top-1 cursor-pointer"
                   >
                     <Send className="w-3 h-3" />
                   </button>
