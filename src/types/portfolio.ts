@@ -11,7 +11,7 @@ export interface Project {
   techStack: string[];
   liveUrl?: string;
   githubUrl?: string;
-  mockupType: 'freshbites' | 'voting';
+  mockupType: 'freshbites' | 'voting' | 'codelab';
   metrics: { label: string; value: string }[];
 }
 

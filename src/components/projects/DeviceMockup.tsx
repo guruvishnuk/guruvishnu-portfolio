@@ -1,12 +1,54 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ShieldCheck, Lock, Fingerprint, ShoppingBag, Flame, Sparkles } from 'lucide-react';
+import { ShieldCheck, Lock, Fingerprint, ShoppingBag, Flame, Sparkles, Code2, CheckCircle2 } from 'lucide-react';
 
 interface DeviceMockupProps {
-  type: 'freshbites' | 'voting';
+  type: 'freshbites' | 'voting' | 'codelab';
 }
 
 export const DeviceMockup: React.FC<DeviceMockupProps> = ({ type }) => {
+  if (type === 'codelab') {
+    return (
+      <div className="relative w-full max-w-xl mx-auto perspective-1000 py-6">
+        <motion.div
+          whileHover={{ rotateY: -3, rotateX: 2, scale: 1.02 }}
+          transition={{ type: 'spring', damping: 20, stiffness: 150 }}
+          className="relative glass-card border-blue-500/30 p-3 rounded-2xl bg-[#080d1a]/95 shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
+        >
+          {/* Editor Header Bar */}
+          <div className="flex items-center justify-between px-3 py-2 bg-blue-950/40 rounded-t-xl border-b border-blue-500/20 mb-2">
+            <div className="flex items-center gap-2">
+              <Code2 className="w-3.5 h-3.5 text-[#4F8CFF]" />
+              <span className="text-[10px] font-mono text-[#4F8CFF]">codelab.dev/architecture</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[9px] font-mono text-emerald-400">Vite Active</span>
+            </div>
+          </div>
+
+          {/* Editor Body */}
+          <div className="p-4 bg-[#040814] rounded-b-xl border border-blue-500/20 space-y-3 font-mono text-left">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2 text-[10px] text-[#8A8A8E]">
+              <span className="text-blue-400 font-semibold">PlatformPhilosophy.tsx</span>
+              <span>TypeScript 5.8 • React 19</span>
+            </div>
+            <div className="space-y-1 text-[11px] leading-relaxed">
+              <p className="text-purple-400"><span className="text-blue-400">export</span> <span className="text-purple-400">const</span> CodeLabCore = () =&gt; &#123;</p>
+              <p className="text-[#8A8A8E] pl-3">// Interactive code learning engine</p>
+              <p className="text-blue-300 pl-3">architecture: <span className="text-emerald-300">'Modular Micro-Frontends'</span>,</p>
+              <p className="text-blue-300 pl-3">execution: <span className="text-emerald-300">'Client-Side WebAssembly'</span></p>
+              <p className="text-purple-400">&#125;;</p>
+              <p className="text-emerald-400 flex items-center gap-1.5 pt-1 text-[10px]">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>Live Interactive Sandbox ready</span>
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
   if (type === 'freshbites') {
     return (
       <div className="relative w-full max-w-xl mx-auto perspective-1000 py-6">
