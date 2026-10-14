@@ -41,25 +41,25 @@ const TreeItem: React.FC<{ node: TreeNode; accentColor: string }> = ({ node, acc
   const isFolder = node.type === 'folder' && node.children && node.children.length > 0;
 
   return (
-    <div className="pl-4 border-l border-white/10 font-mono text-xs my-1 select-none">
+    <div className="pl-4 border-l border-slate-200 dark:border-white/10 font-mono text-xs my-1 select-none">
       <div
         onClick={() => isFolder && setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 py-1 px-2 rounded hover:bg-white/5 cursor-pointer ${
-          isFolder ? 'text-[#F5F5F7]' : 'text-[#8A8A8E]'
+        className={`flex items-center gap-2 py-1 px-2 rounded hover:bg-slate-100 dark:hover:bg-white/5 cursor-pointer ${
+          isFolder ? 'text-slate-900 dark:text-[#F5F5F7] font-medium' : 'text-slate-600 dark:text-[#8A8A8E]'
         }`}
         data-cursor="hover"
       >
         {isFolder ? (
           isOpen ? (
-            <ChevronDown className="w-3.5 h-3.5 text-[#8A8A8E]" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-[#8A8A8E]" />
           ) : (
-            <ChevronRight className="w-3.5 h-3.5 text-[#8A8A8E]" />
+            <ChevronRight className="w-3.5 h-3.5 text-slate-500 dark:text-[#8A8A8E]" />
           )
         ) : (
           <FileCode className="w-3.5 h-3.5" style={{ color: accentColor }} />
         )}
-        {isFolder && <Folder className="w-3.5 h-3.5 text-amber-400" />}
-        <span style={{ color: !isFolder ? '#8A8A8E' : undefined }}>{node.name}</span>
+        {isFolder && <Folder className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />}
+        <span className={!isFolder ? 'text-slate-600 dark:text-[#8A8A8E]' : 'text-slate-900 dark:text-[#F5F5F7]'}>{node.name}</span>
       </div>
 
       <AnimatePresence>
@@ -82,9 +82,9 @@ const TreeItem: React.FC<{ node: TreeNode; accentColor: string }> = ({ node, acc
 
 export const ComponentTreeViz: React.FC<{ accentColor: string }> = ({ accentColor }) => {
   return (
-    <div className="p-4 rounded-xl bg-black/50 border border-white/10 overflow-hidden space-y-2">
-      <div className="flex items-center gap-2 text-xs font-mono text-[#8A8A8E] pb-2 border-b border-white/10">
-        <Layers className="w-4 h-4 text-[#4F8CFF]" />
+    <div className="p-4 rounded-xl bg-slate-100/80 dark:bg-black/50 border border-slate-200 dark:border-white/10 overflow-hidden space-y-2">
+      <div className="flex items-center gap-2 text-xs font-mono text-slate-600 dark:text-[#8A8A8E] pb-2 border-b border-slate-200 dark:border-white/10 font-medium">
+        <Layers className="w-4 h-4 text-blue-600 dark:text-[#4F8CFF]" />
         <span>Component Tree Visualizer</span>
       </div>
       <TreeItem node={initialTree} accentColor={accentColor} />

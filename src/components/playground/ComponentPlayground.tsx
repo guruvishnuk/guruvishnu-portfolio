@@ -28,21 +28,21 @@ export const ComponentPlayground: React.FC = () => {
     <section id="playground" className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Badge variant="pulse">Interactive Playground</Badge>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-[#F5F5F7]">
           Live Component Sandbox
         </h2>
-        <p className="text-[#8A8A8E] text-base md:text-lg">
+        <p className="text-slate-600 dark:text-[#8A8A8E] text-base md:text-lg">
           Prove it, don't tell it—customize design tokens, animation speed multipliers, and inspect component node trees live.
         </p>
       </div>
 
-      <GlassCard className="p-6 md:p-8 bg-[#0a0a0c]/90 border-white/15">
+      <GlassCard className="p-6 md:p-8 bg-white/90 dark:bg-[#0a0a0c]/90 border-slate-200 dark:border-white/15">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Controls Panel */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-3">
-              <label className="text-xs font-mono uppercase tracking-wider text-[#8A8A8E] flex items-center gap-2">
-                <Sliders className="w-3.5 h-3.5 text-[#4F8CFF]" />
+              <label className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-[#8A8A8E] flex items-center gap-2 font-medium">
+                <Sliders className="w-3.5 h-3.5 text-blue-600 dark:text-[#4F8CFF]" />
                 Accent Theme Token
               </label>
               <div className="flex flex-wrap gap-3">
@@ -52,8 +52,8 @@ export const ComponentPlayground: React.FC = () => {
                     onClick={() => setAccentColor(swatch.value)}
                     className={`w-9 h-9 rounded-full transition-all border-2 flex items-center justify-center cursor-pointer ${
                       accentColor === swatch.value
-                        ? 'border-white scale-110 shadow-lg'
-                        : 'border-transparent opacity-70 hover:opacity-100'
+                        ? 'border-slate-800 dark:border-white scale-110 shadow-lg'
+                        : 'border-transparent opacity-75 hover:opacity-100'
                     }`}
                     style={{ backgroundColor: swatch.value }}
                     title={swatch.name}
@@ -65,8 +65,8 @@ export const ComponentPlayground: React.FC = () => {
 
             {/* Animation Speed Multiplier */}
             <div className="space-y-3">
-              <label className="text-xs font-mono uppercase tracking-wider text-[#8A8A8E] flex items-center gap-2">
-                <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <label className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-[#8A8A8E] flex items-center gap-2 font-medium">
+                <Zap className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
                 Motion Speed Multiplier ({animSpeed}x)
               </label>
               <div className="flex gap-2">
@@ -76,8 +76,8 @@ export const ComponentPlayground: React.FC = () => {
                     onClick={() => setAnimSpeed(speed)}
                     className={`flex-1 py-2 rounded-lg font-mono text-xs border transition-all cursor-pointer ${
                       animSpeed === speed
-                        ? 'bg-white/15 border-white text-white font-bold'
-                        : 'bg-white/5 border-white/10 text-[#8A8A8E] hover:text-white'
+                        ? 'bg-slate-200 dark:bg-white/15 border-slate-400 dark:border-white text-slate-900 dark:text-white font-bold shadow-sm'
+                        : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-slate-900 dark:hover:text-white'
                     }`}
                     data-cursor="hover"
                   >
@@ -93,7 +93,7 @@ export const ComponentPlayground: React.FC = () => {
 
           {/* Right Live Preview Box */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <div className="p-6 md:p-8 rounded-2xl bg-black/60 border border-white/10 relative overflow-hidden flex flex-col justify-between min-h-[360px]">
+            <div className="p-6 md:p-8 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-white/10 relative overflow-hidden flex flex-col justify-between min-h-[360px]">
               {/* Dynamic Glow Layer */}
               <div
                 className="absolute inset-0 opacity-15 blur-[60px] pointer-events-none transition-colors duration-500"
@@ -101,10 +101,10 @@ export const ComponentPlayground: React.FC = () => {
               />
 
               <div className="flex items-center justify-between z-10">
-                <span className="text-xs font-mono text-[#8A8A8E]">Live Output Component</span>
+                <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] font-medium">Live Output Component</span>
                 <button
                   onClick={triggerAnimation}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-white bg-white/10 border border-white/15 hover:bg-white/20 transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-slate-800 dark:text-white bg-slate-200/80 dark:bg-white/10 border border-slate-300 dark:border-white/15 hover:bg-slate-300 dark:hover:bg-white/20 transition-all cursor-pointer"
                   data-cursor="hover"
                 >
                   <Play className="w-3 h-3" />
@@ -119,7 +119,7 @@ export const ComponentPlayground: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.9, y: 15 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.6 / animSpeed, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-6 rounded-xl bg-white/5 border border-white/15 shadow-2xl space-y-4 max-w-md mx-auto"
+                  className="p-6 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/15 shadow-xl space-y-4 max-w-md mx-auto"
                 >
                   <div className="flex items-center justify-between">
                     <span
@@ -132,11 +132,11 @@ export const ComponentPlayground: React.FC = () => {
                     >
                       Dynamic Theme Token
                     </span>
-                    <span className="text-xs font-mono text-[#8A8A8E]">60 FPS</span>
+                    <span className="text-xs font-mono text-slate-500 dark:text-[#8A8A8E]">60 FPS</span>
                   </div>
 
-                  <h4 className="text-xl font-bold text-white">System Primitive Card</h4>
-                  <p className="text-xs text-[#8A8A8E] leading-relaxed">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white">System Primitive Card</h4>
+                  <p className="text-xs text-slate-600 dark:text-[#8A8A8E] leading-relaxed">
                     React 19 compound component receiving token updates in real-time.
                   </p>
 
@@ -151,7 +151,7 @@ export const ComponentPlayground: React.FC = () => {
                 </motion.div>
               </div>
 
-              <div className="text-center font-mono text-[10px] text-[#8A8A8E] z-10">
+              <div className="text-center font-mono text-[10px] text-slate-500 dark:text-[#8A8A8E] z-10">
                 Tokens: <span style={{ color: accentColor }}>{accentColor}</span> | Speed: {animSpeed}x
               </div>
             </div>
