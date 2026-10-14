@@ -22,10 +22,10 @@ export const HireMeFlow: React.FC = () => {
     <section id="services" className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Badge variant="pulse">Structured Workflow</Badge>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-[#F5F5F7]">
           What Happens When You Hire Me
         </h2>
-        <p className="text-[#8A8A8E] text-base md:text-lg">
+        <p className="text-slate-600 dark:text-[#8A8A8E] text-base md:text-lg">
           De-risking every sprint with predictable delivery, transparent communication, and technical rigor.
         </p>
       </div>
@@ -40,8 +40,8 @@ export const HireMeFlow: React.FC = () => {
               onClick={() => setActiveStep(item.step)}
               className={`px-4 py-2 rounded-full font-mono text-xs flex items-center gap-2 transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-[#4F8CFF] text-white shadow-[0_0_20px_rgba(79,140,255,0.4)]'
-                  : 'bg-white/5 border border-white/10 text-[#8A8A8E] hover:text-white'
+                  ? 'bg-blue-600 dark:bg-[#4F8CFF] text-white shadow-[0_0_20px_rgba(79,140,255,0.4)]'
+                  : 'bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-slate-900 dark:hover:text-white'
               }`}
               data-cursor="hover"
             >
@@ -66,29 +66,29 @@ export const HireMeFlow: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <GlassCard glow className="p-8 border-[#4F8CFF]/40 bg-[#0a0a0c]/90">
+              <GlassCard glow className="p-8 border-blue-500/30 dark:border-[#4F8CFF]/40 bg-white/90 dark:bg-[#0a0a0c]/90 shadow-lg dark:shadow-2xl">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                  <div className="md:col-span-4 flex flex-col items-start gap-4 border-b md:border-b-0 md:border-r border-white/10 pb-6 md:pb-0 md:pr-6">
-                    <div className="p-4 rounded-2xl bg-[#4F8CFF]/15 border border-[#4F8CFF]/30 text-[#4F8CFF]">
+                  <div className="md:col-span-4 flex flex-col items-start gap-4 border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 pb-6 md:pb-0 md:pr-6">
+                    <div className="p-4 rounded-2xl bg-blue-500/10 dark:bg-[#4F8CFF]/15 border border-blue-500/25 dark:border-[#4F8CFF]/30 text-blue-600 dark:text-[#4F8CFF]">
                       {iconMap[item.iconName]}
                     </div>
                     <div>
-                      <span className="text-xs font-mono text-[#4F8CFF] font-bold">
+                      <span className="text-xs font-mono text-blue-600 dark:text-[#4F8CFF] font-bold">
                         STEP 0{item.step} / 06
                       </span>
-                      <h3 className="text-2xl font-bold text-white mt-1">{item.title}</h3>
-                      <p className="text-xs font-mono text-[#8A8A8E] mt-1">{item.shortDesc}</p>
+                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{item.title}</h3>
+                      <p className="text-xs font-mono text-slate-500 dark:text-[#8A8A8E] mt-1">{item.shortDesc}</p>
                     </div>
                   </div>
 
                   <div className="md:col-span-8 space-y-4">
-                    <p className="text-[#8A8A8E] text-base leading-relaxed font-sans">
+                    <p className="text-slate-600 dark:text-[#8A8A8E] text-base leading-relaxed font-sans">
                       {item.detail}
                     </p>
 
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs font-mono text-[#F5F5F7]">
+                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs font-mono text-slate-800 dark:text-[#F5F5F7] shadow-sm dark:shadow-none">
                       <span>Guaranteed outcome:</span>
-                      <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         Verified Milestone Delivery
                       </span>
