@@ -7,15 +7,15 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative border-t border-white/10 bg-[#050505] py-16 px-6 overflow-hidden">
+    <footer className="relative border-t border-slate-200/80 dark:border-white/10 bg-slate-100/60 dark:bg-[#050505] py-16 px-6 overflow-hidden transition-colors duration-300">
       {/* Background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-[#4F8CFF]/5 blur-[80px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-8 text-center relative z-10">
         {/* Quote */}
-        <p className="font-display italic text-lg md:text-xl text-[#8A8A8E] max-w-lg">
+        <p className="font-display italic text-lg md:text-xl text-slate-600 dark:text-[#8A8A8E] max-w-lg">
           "Great software isn't built by accident.{' '}
-          <span className="text-[#F5F5F7] not-italic font-semibold">It's engineered.</span>"
+          <span className="text-slate-900 dark:text-[#F5F5F7] not-italic font-semibold">It's engineered.</span>"
         </p>
 
         {/* Social Icons */}
@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
             href="https://github.com/guruvishnuk"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white/5 border border-white/10 text-[#8A8A8E] hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
+            className="p-3 rounded-full bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-[#4F8CFF] dark:hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
             title="GitHub"
             data-cursor="hover"
           >
@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
             href="https://www.linkedin.com/in/guruvishnu-kajagar-/"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white/5 border border-white/10 text-[#8A8A8E] hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
+            className="p-3 rounded-full bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-[#4F8CFF] dark:hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
             title="LinkedIn"
             data-cursor="hover"
           >
@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
           </a>
           <a
             href="mailto:guruvishnukajagar@gmail.com"
-            className="p-3 rounded-full bg-white/5 border border-white/10 text-[#8A8A8E] hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
+            className="p-3 rounded-full bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-[#4F8CFF] dark:hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
             title="Email"
             data-cursor="hover"
           >
@@ -51,18 +51,18 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom row */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5 text-xs text-[#8A8A8E] font-mono">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-slate-200 dark:border-white/5 text-xs text-slate-500 dark:text-[#8A8A8E] font-mono">
           <div>
             © {new Date().getFullYear()} Guruvishnu Kajagar. Built with React 19, Motion & Vite.
           </div>
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-[#8A8A8E] hover:text-white transition-colors cursor-pointer group"
+            className="flex items-center gap-2 text-slate-600 hover:text-slate-900 dark:text-[#8A8A8E] dark:hover:text-white transition-colors cursor-pointer group"
             data-cursor="hover"
           >
             <span>Back to top</span>
-            <div className="p-1.5 rounded-full bg-white/5 group-hover:bg-[#4F8CFF] group-hover:text-white transition-colors">
+            <div className="p-1.5 rounded-full bg-slate-200 dark:bg-white/5 group-hover:bg-[#4F8CFF] group-hover:text-white transition-colors">
               <ArrowUp className="w-3.5 h-3.5" />
             </div>
           </button>
