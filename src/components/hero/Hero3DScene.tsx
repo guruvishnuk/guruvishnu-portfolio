@@ -88,9 +88,11 @@ export const Hero3DScene: React.FC = () => {
       const laptopX = centerX - laptopW / 2;
       const laptopY = centerY - laptopH / 2 + 30;
 
+      const isDark = document.documentElement.classList.contains('dark');
+
       // Laptop Base
-      ctx.fillStyle = '#1A1A1E';
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.fillStyle = isDark ? '#1A1A1E' : '#CBD5E1';
+      ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(15,23,42,0.15)';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.roundRect(laptopX - 30, laptopY + laptopH - 10, laptopW + 60, 16, 8);
@@ -98,14 +100,14 @@ export const Hero3DScene: React.FC = () => {
       ctx.stroke();
 
       // Laptop Notch
-      ctx.fillStyle = '#2A2A30';
+      ctx.fillStyle = isDark ? '#2A2A30' : '#94A3B8';
       ctx.beginPath();
       ctx.roundRect(centerX - 25, laptopY + laptopH - 10, 50, 6, 3);
       ctx.fill();
 
       // Laptop Screen Shell
-      ctx.fillStyle = '#0A0A0C';
-      ctx.strokeStyle = 'rgba(79, 140, 255, 0.4)';
+      ctx.fillStyle = isDark ? '#0A0A0C' : '#1E293B';
+      ctx.strokeStyle = isDark ? 'rgba(79, 140, 255, 0.4)' : 'rgba(37, 99, 235, 0.5)';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.roundRect(laptopX, laptopY, laptopW, laptopH - 10, 12);
@@ -119,7 +121,7 @@ export const Hero3DScene: React.FC = () => {
       const screenW = laptopW - screenMargin * 2;
       const screenH = laptopH - 10 - screenMargin * 2;
 
-      ctx.fillStyle = '#05070E';
+      ctx.fillStyle = isDark ? '#05070E' : '#0F172A';
       ctx.beginPath();
       ctx.roundRect(screenX, screenY, screenW, screenH, 8);
       ctx.fill();
@@ -164,15 +166,15 @@ export const Hero3DScene: React.FC = () => {
       // Floating VS Code / Tech Card Left
       const card1X = laptopX - 50 + currentTiltY * 15;
       const card1Y = laptopY - 20 + Math.sin(reactAngle * 2) * 8;
-      ctx.fillStyle = 'rgba(10, 10, 12, 0.85)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.fillStyle = isDark ? 'rgba(10, 10, 12, 0.9)' : 'rgba(255, 255, 255, 0.92)';
+      ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(15, 23, 42, 0.12)';
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.roundRect(card1X, card1Y, 110, 50, 10);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = '#8A8A8E';
+      ctx.fillStyle = isDark ? '#8A8A8E' : '#475569';
       ctx.font = '10px "Geist Mono", monospace';
       ctx.fillText('<Code />', card1X + 14, card1Y + 22);
       ctx.fillStyle = '#4F8CFF';
@@ -181,8 +183,8 @@ export const Hero3DScene: React.FC = () => {
       // Floating Performance Card Right
       const card2X = laptopX + laptopW - 40 + currentTiltY * 15;
       const card2Y = laptopY + 40 + Math.cos(reactAngle * 2) * 8;
-      ctx.fillStyle = 'rgba(10, 10, 12, 0.85)';
-      ctx.strokeStyle = 'rgba(79, 140, 255, 0.3)';
+      ctx.fillStyle = isDark ? 'rgba(10, 10, 12, 0.9)' : 'rgba(255, 255, 255, 0.92)';
+      ctx.strokeStyle = isDark ? 'rgba(79, 140, 255, 0.3)' : 'rgba(79, 140, 255, 0.4)';
       ctx.beginPath();
       ctx.roundRect(card2X, card2Y, 120, 54, 10);
       ctx.fill();
@@ -191,7 +193,7 @@ export const Hero3DScene: React.FC = () => {
       ctx.fillStyle = '#10B981';
       ctx.font = 'bold 11px "Geist", sans-serif';
       ctx.fillText('⚡ 98/100', card2X + 14, card2Y + 24);
-      ctx.fillStyle = '#8A8A8E';
+      ctx.fillStyle = isDark ? '#8A8A8E' : '#475569';
       ctx.font = '10px "Geist Mono", monospace';
       ctx.fillText('Lighthouse Score', card2X + 14, card2Y + 40);
 

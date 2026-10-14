@@ -37,7 +37,7 @@ export const HeroSection: React.FC = () => {
 
           {/* H1 Heading */}
           <motion.div variants={lineReveal} className="overflow-hidden">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#F5F5F7]">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-[#F5F5F7]">
               Hello, I'm{' '}
               <span className="gradient-accent-text block sm:inline">
                 Guruvishnu.
@@ -47,17 +47,17 @@ export const HeroSection: React.FC = () => {
 
           {/* Rotating Role Line */}
           <motion.div variants={fadeInUp} className="flex items-center gap-3">
-            <span className="text-[#8A8A8E] text-lg sm:text-xl font-mono">I am a</span>
+            <span className="text-slate-600 dark:text-[#8A8A8E] text-lg sm:text-xl font-mono">I am a</span>
             <RotatingRoleText />
           </motion.div>
 
           {/* Positioning Statement */}
           <motion.p
             variants={fadeInUp}
-            className="text-[#8A8A8E] text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl font-sans"
+            className="text-slate-600 dark:text-[#8A8A8E] text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl font-sans"
           >
             I'm a Frontend Engineer at{' '}
-            <strong className="text-[#F5F5F7] font-semibold">CandorWorks</strong> passionate about
+            <strong className="text-slate-900 dark:text-[#F5F5F7] font-semibold">CandorWorks</strong> passionate about
             building clean, fast, and responsive React applications. I focus on writing clean
             TypeScript, building reusable UI component libraries, and optimizing frontend user experiences.
           </motion.p>
@@ -112,7 +112,7 @@ export const HeroSection: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs font-mono text-[#8A8A8E]"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs font-mono text-slate-500 dark:text-[#8A8A8E]"
       >
         <span className="uppercase tracking-widest text-[10px]">Scroll to explore</span>
         <motion.div
