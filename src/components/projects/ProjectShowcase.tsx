@@ -8,10 +8,10 @@ export const ProjectShowcase: React.FC = () => {
     <section id="projects" className="py-16 relative">
       <div className="text-center max-w-3xl mx-auto px-6 mb-16 space-y-4">
         <Badge variant="pulse">Full-Bleed Product Showcases</Badge>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-[#F5F5F7]">
           Featured Production Ships
         </h2>
-        <p className="text-[#8A8A8E] text-base md:text-lg">
+        <p className="text-slate-600 dark:text-[#8A8A8E] text-base md:text-lg">
           Detailed case studies focusing on challenge, technical approach, and measurable outcome.
         </p>
       </div>
