@@ -18,7 +18,7 @@ export const LoadingScreen: React.FC = () => {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] text-[#F5F5F7]"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[var(--theme-bg)] text-[var(--theme-text-primary)]"
           exit={{
             y: '-100%',
             opacity: 0,
@@ -38,7 +38,8 @@ export const LoadingScreen: React.FC = () => {
                 x="2"
                 y="2"
                 rx="20"
-                stroke="rgba(255,255,255,0.15)"
+                stroke="currentColor"
+                className="text-slate-300 dark:text-white/15"
                 strokeWidth="2"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
@@ -65,7 +66,7 @@ export const LoadingScreen: React.FC = () => {
               />
             </svg>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs text-[#8A8A8E] tracking-widest uppercase">
+              <span className="font-mono text-xs text-[var(--theme-text-secondary)] tracking-widest uppercase">
                 GURUVISHNU.DEV
               </span>
               <motion.span

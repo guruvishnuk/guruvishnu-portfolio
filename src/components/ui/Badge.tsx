@@ -15,15 +15,15 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-2 px-3 py-1 text-xs font-mono tracking-wider uppercase rounded-full select-none',
+        'inline-flex items-center gap-2 px-3 py-1 text-xs font-mono tracking-wider uppercase rounded-full select-none transition-colors',
         variant === 'pulse' &&
-          'glass-pill text-[#4F8CFF] border border-[#4F8CFF]/30 bg-[#4F8CFF]/10',
+          'glass-pill text-blue-600 dark:text-[#4F8CFF] border border-blue-500/25 dark:border-[#4F8CFF]/30 bg-blue-500/10 dark:bg-[#4F8CFF]/10 font-semibold',
         variant === 'glass' &&
-          'bg-white/5 border border-white/10 text-[#8A8A8E]',
+          'bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E]',
         variant === 'accent' &&
-          'bg-[#4F8CFF]/20 border border-[#4F8CFF]/40 text-[#4F8CFF]',
+          'bg-blue-500/10 dark:bg-[#4F8CFF]/20 border border-blue-500/30 dark:border-[#4F8CFF]/40 text-blue-600 dark:text-[#4F8CFF] font-semibold',
         variant === 'outline' &&
-          'border border-white/20 text-[#F5F5F7]',
+          'border border-slate-300 dark:border-white/20 text-slate-800 dark:text-[#F5F5F7]',
         className
       )}
     >
