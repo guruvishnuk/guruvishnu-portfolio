@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-bg: var(--theme-bg);
   --color-bg-elevated: var(--theme-bg-elevated);
+  --color-bg-subtle: var(--theme-bg-subtle);
   --color-text-primary: var(--theme-text-primary);
   --color-text-secondary: var(--theme-text-secondary);
+  --color-text-muted: var(--theme-text-muted);
   --color-border: var(--theme-border);
+  --color-border-subtle: var(--theme-border-subtle);
 
   --color-accent: #4F8CFF;
-  --color-accent-soft: rgba(79, 140, 255, 0.1);
+  --color-accent-soft: rgba(79, 140, 255, 0.12);
   --radius-card: 1.25rem;
   --font-display: "Geist", "Inter", ui-sans-serif, system-ui;
   --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
@@ -21,26 +26,36 @@
   }
   
   :root {
-    --theme-bg: #FFFFFF;
-    --theme-bg-elevated: #F9F9FA;
-    --theme-text-primary: #1A1A1C;
-    --theme-text-secondary: #6B7280;
-    --theme-border: rgba(0, 0, 0, 0.1);
-    --glass-bg: rgba(0, 0, 0, 0.03);
-    --glass-border: rgba(0, 0, 0, 0.08);
-    --glass-pill-bg: rgba(0, 0, 0, 0.05);
+    --theme-bg: #F8FAFC;
+    --theme-bg-elevated: #FFFFFF;
+    --theme-bg-subtle: rgba(15, 23, 42, 0.04);
+    --theme-bg-hover: rgba(15, 23, 42, 0.07);
+    --theme-text-primary: #0F172A;
+    --theme-text-secondary: #475569;
+    --theme-text-muted: #64748B;
+    --theme-border: rgba(15, 23, 42, 0.09);
+    --theme-border-subtle: rgba(15, 23, 42, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(15, 23, 42, 0.09);
+    --glass-pill-bg: rgba(255, 255, 255, 0.9);
+    --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
     color-scheme: light;
   }
 
   .dark {
     --theme-bg: #050505;
-    --theme-bg-elevated: #0a0a0c;
-    --theme-text-primary: #F5F5F7;
-    --theme-text-secondary: #8A8A8E;
+    --theme-bg-elevated: #0A0A0C;
+    --theme-bg-subtle: rgba(255, 255, 255, 0.04);
+    --theme-bg-hover: rgba(255, 255, 255, 0.08);
+    --theme-text-primary: #F8FAFC;
+    --theme-text-secondary: #94A3B8;
+    --theme-text-muted: #64748B;
     --theme-border: rgba(255, 255, 255, 0.08);
-    --glass-bg: rgba(255, 255, 255, 0.03);
+    --theme-border-subtle: rgba(255, 255, 255, 0.04);
+    --glass-bg: rgba(10, 10, 12, 0.8);
     --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-pill-bg: rgba(255, 255, 255, 0.05);
+    --glass-pill-bg: rgba(10, 10, 12, 0.85);
+    --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     color-scheme: dark;
   }
 
@@ -54,6 +69,7 @@
   body {
     background-color: var(--theme-bg);
     overflow-x: hidden;
+    color: var(--theme-text-primary);
   }
 
   /* Custom scrollbar */
@@ -78,17 +94,13 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   border-radius: var(--radius-card);
-  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
-}
-
-.dark .glass-card {
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(79, 140, 255, 0.3);
+  border-color: rgba(79, 140, 255, 0.4);
 }
 
 .glass-card-sm {
@@ -105,7 +117,8 @@
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-border);
   border-radius: 9999px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-pill:hover {
@@ -125,7 +138,13 @@
 }
 
 .gradient-accent-text {
-  background: linear-gradient(135deg, var(--theme-text-primary) 0%, #4F8CFF 70%, #2563EB 100%);
+  background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #4F8CFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .gradient-accent-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #4F8CFF 70%, #2563EB 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
