@@ -18,16 +18,16 @@ export const PerformanceDashboard: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div className="space-y-4 max-w-2xl">
           <Badge variant="pulse">Performance Dashboard</Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-[#F5F5F7]">
             Quantifiable Impact & Engineering Metrics
           </h2>
-          <p className="text-[#8A8A8E] text-base md:text-lg">
+          <p className="text-slate-600 dark:text-[#8A8A8E] text-base md:text-lg">
             Engineering isn't about guesswork—it's measured in sub-second latencies, lean bundles, and zero regressions.
           </p>
         </div>
 
-        <div className="glass-pill px-4 py-2 flex items-center gap-3 text-xs font-mono text-[#8A8A8E] self-start md:self-auto border border-white/10">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="glass-pill px-4 py-2 flex items-center gap-3 text-xs font-mono text-slate-600 dark:text-[#8A8A8E] self-start md:self-auto border border-slate-200 dark:border-white/10">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
           <span>Real Production Metrics</span>
         </div>
       </div>
@@ -46,16 +46,16 @@ export const PerformanceDashboard: React.FC = () => {
               <div>
                 {/* Header row */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#8A8A8E]">
+                  <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-[#8A8A8E]">
                     {metric.label}
                   </span>
-                  <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#4F8CFF] group-hover:bg-[#4F8CFF] group-hover:text-white transition-colors">
+                  <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-blue-600 dark:text-[#4F8CFF] group-hover:bg-[#4F8CFF] group-hover:text-white transition-colors">
                     <Zap className="w-4 h-4" />
                   </div>
                 </div>
 
                 {/* Big Animated Counter */}
-                <div className="text-4xl sm:text-5xl font-extrabold text-[#F5F5F7] mb-3 gradient-accent-text flex items-baseline">
+                <div className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-[#F5F5F7] mb-3 gradient-accent-text flex items-baseline">
                   <AnimatedCounter
                     to={metric.value}
                     prefix={metric.prefix}
@@ -64,7 +64,7 @@ export const PerformanceDashboard: React.FC = () => {
                 </div>
 
                 {/* Specific 'How' context string */}
-                <p className="text-xs md:text-sm text-[#8A8A8E] leading-relaxed font-sans border-t border-white/5 pt-3 mb-4">
+                <p className="text-xs md:text-sm text-slate-600 dark:text-[#8A8A8E] leading-relaxed font-sans border-t border-slate-200 dark:border-white/5 pt-3 mb-4">
                   {metric.detail}
                 </p>
               </div>
