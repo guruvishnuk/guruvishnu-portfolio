@@ -19,11 +19,11 @@ export const TagCloud: React.FC = () => {
     <section className="py-20 px-6 max-w-6xl mx-auto text-center relative overflow-hidden">
       <div className="space-y-4 mb-12">
         <Badge variant="pulse">Playful Crafts</Badge>
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#F5F5F7]">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-[#F5F5F7]">
           Things I Love Building
         </h2>
-        <p className="text-[#8A8A8E] text-sm sm:text-base flex items-center justify-center gap-1.5">
-          <Move className="w-4 h-4 text-[#4F8CFF]" />
+        <p className="text-slate-600 dark:text-[#8A8A8E] text-sm sm:text-base flex items-center justify-center gap-1.5 font-sans">
+          <Move className="w-4 h-4 text-blue-600 dark:text-[#4F8CFF]" />
           <span>Interactive drag-enabled tech chips—try tossing them around!</span>
         </p>
       </div>
@@ -43,14 +43,14 @@ export const TagCloud: React.FC = () => {
             transition={{
               y: { repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut' },
             }}
-            className="glass-pill px-5 py-2.5 flex items-center gap-2.5 cursor-grab active:cursor-grabbing border border-white/15 bg-[#0a0a0c]/80 shadow-xl select-none"
+            className="glass-pill px-5 py-2.5 flex items-center gap-2.5 cursor-grab active:cursor-grabbing border border-slate-200 dark:border-white/15 bg-white/80 dark:bg-[#0a0a0c]/80 shadow-md dark:shadow-xl select-none"
             data-cursor="hover"
           >
             <span
               className="w-2.5 h-2.5 rounded-full"
               style={{ backgroundColor: tag.color, boxShadow: `0 0 10px ${tag.color}` }}
             />
-            <span className="text-xs sm:text-sm font-mono font-medium text-[#F5F5F7]">
+            <span className="text-xs sm:text-sm font-mono font-medium text-slate-800 dark:text-[#F5F5F7]">
               {tag.name}
             </span>
           </motion.div>
