@@ -27,15 +27,15 @@ export const TerminalBoot: React.FC = () => {
 
   return (
     <section id="terminal-boot" className="py-16 px-6 max-w-5xl mx-auto" ref={containerRef}>
-      <GlassCard className="p-0 border-white/15 bg-[#0a0a0c]/90 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+      <GlassCard className="p-0 border-slate-200 dark:border-white/15 bg-white/95 dark:bg-[#0a0a0c]/90 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
         {/* macOS Traffic light header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-white/[0.04] border-b border-white/10">
+        <div className="flex items-center justify-between px-4 py-3 bg-slate-100/90 dark:bg-white/[0.04] border-b border-slate-200 dark:border-white/10">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
             <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
             <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-[#8A8A8E]">
+          <div className="flex items-center gap-2 text-xs font-mono text-slate-600 dark:text-[#8A8A8E]">
             <TerminalIcon className="w-3.5 h-3.5 text-[#4F8CFF]" />
             <span>guruvishnu@candorworks ~ zsh</span>
           </div>
@@ -43,7 +43,7 @@ export const TerminalBoot: React.FC = () => {
         </div>
 
         {/* Terminal Body */}
-        <div className="p-6 font-mono text-xs sm:text-sm md:text-base leading-relaxed space-y-3 text-[#F5F5F7]">
+        <div className="p-6 font-mono text-xs sm:text-sm md:text-base leading-relaxed space-y-3 text-slate-800 dark:text-[#F5F5F7]">
           {completedLines.map((line, idx) => {
             const isSuccess = line.startsWith('✓');
             const isHeader = line.startsWith('>');
@@ -61,16 +61,16 @@ export const TerminalBoot: React.FC = () => {
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 15 }}
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
                   </motion.span>
                 )}
                 <span
                   className={
                     isHeader
-                      ? 'text-[#4F8CFF] font-semibold'
+                      ? 'text-blue-600 dark:text-[#4F8CFF] font-semibold'
                       : isSuccess
-                      ? 'text-[#F5F5F7]'
-                      : 'text-[#8A8A8E]'
+                      ? 'text-slate-800 dark:text-[#F5F5F7]'
+                      : 'text-slate-500 dark:text-[#8A8A8E]'
                   }
                 >
                   {line}
@@ -85,10 +85,10 @@ export const TerminalBoot: React.FC = () => {
               <span
                 className={
                   currentLineText.startsWith('>')
-                    ? 'text-[#4F8CFF] font-semibold'
+                    ? 'text-blue-600 dark:text-[#4F8CFF] font-semibold'
                     : currentLineText.startsWith('✓')
-                    ? 'text-[#F5F5F7]'
-                    : 'text-[#8A8A8E]'
+                    ? 'text-slate-800 dark:text-[#F5F5F7]'
+                    : 'text-slate-500 dark:text-[#8A8A8E]'
                 }
               >
                 {currentLineText}
@@ -107,13 +107,13 @@ export const TerminalBoot: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-[#8A8A8E]"
+              className="pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs text-slate-500 dark:text-[#8A8A8E]"
             >
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                 <span>Process exited with code 0</span>
               </div>
-              <span className="text-[#4F8CFF]">Environment initialized in 1.1s</span>
+              <span className="text-blue-600 dark:text-[#4F8CFF] font-semibold">Environment initialized in 1.1s</span>
             </motion.div>
           )}
         </div>
