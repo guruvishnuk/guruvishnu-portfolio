@@ -83,15 +83,15 @@ export const ContactForm: React.FC = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="p-8 text-center space-y-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30"
       >
-        <CheckCircle className="w-12 h-12 text-emerald-400 mx-auto" />
-        <h4 className="text-xl font-bold text-white">Message Dispatched!</h4>
-        <p className="text-sm text-[#8A8A8E]">
+        <CheckCircle className="w-12 h-12 text-emerald-600 dark:text-emerald-400 mx-auto" />
+        <h4 className="text-xl font-bold text-slate-900 dark:text-white">Message Dispatched!</h4>
+        <p className="text-sm text-slate-600 dark:text-[#8A8A8E]">
           Thank you for reaching out! Your message has been sent to{' '}
-          <strong className="text-[#F5F5F7]">guruvishnukajagar@gmail.com</strong>.
+          <strong className="text-slate-900 dark:text-[#F5F5F7]">guruvishnukajagar@gmail.com</strong>.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
-          className="text-xs font-mono text-[#4F8CFF] underline cursor-pointer"
+          className="text-xs font-mono text-blue-600 dark:text-[#4F8CFF] underline cursor-pointer font-medium"
         >
           Send another message
         </button>
@@ -102,17 +102,17 @@ export const ContactForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 font-sans text-left">
       <div>
-        <label className="block text-xs font-mono text-[#8A8A8E] mb-1.5 uppercase">
+        <label className="block text-xs font-mono text-slate-600 dark:text-[#8A8A8E] mb-1.5 uppercase font-medium">
           Your Name *
         </label>
         <input
           {...register('name')}
           type="text"
           placeholder="e.g. Sarah Connor"
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-[#4F8CFF] transition-colors"
+          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-blue-500 dark:focus:border-[#4F8CFF] focus:ring-1 focus:ring-blue-500/30 transition-colors"
         />
         {errors.name && (
-          <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+          <p className="text-xs text-red-500 dark:text-red-400 mt-1 flex items-center gap-1 font-mono">
             <AlertCircle className="w-3 h-3" />
             {errors.name.message}
           </p>
@@ -120,17 +120,17 @@ export const ContactForm: React.FC = () => {
       </div>
 
       <div>
-        <label className="block text-xs font-mono text-[#8A8A8E] mb-1.5 uppercase">
+        <label className="block text-xs font-mono text-slate-600 dark:text-[#8A8A8E] mb-1.5 uppercase font-medium">
           Email Address *
         </label>
         <input
           {...register('email')}
           type="email"
           placeholder="alex@example.com"
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-[#4F8CFF] transition-colors"
+          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-blue-500 dark:focus:border-[#4F8CFF] focus:ring-1 focus:ring-blue-500/30 transition-colors"
         />
         {errors.email && (
-          <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+          <p className="text-xs text-red-500 dark:text-red-400 mt-1 flex items-center gap-1 font-mono">
             <AlertCircle className="w-3 h-3" />
             {errors.email.message}
           </p>
@@ -138,29 +138,29 @@ export const ContactForm: React.FC = () => {
       </div>
 
       <div>
-        <label className="block text-xs font-mono text-[#8A8A8E] mb-1.5 uppercase">
+        <label className="block text-xs font-mono text-slate-600 dark:text-[#8A8A8E] mb-1.5 uppercase font-medium">
           Company / Organization (Optional)
         </label>
         <input
           {...register('company')}
           type="text"
           placeholder="Acme Corp"
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-[#4F8CFF] transition-colors"
+          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-blue-500 dark:focus:border-[#4F8CFF] focus:ring-1 focus:ring-blue-500/30 transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-xs font-mono text-[#8A8A8E] mb-1.5 uppercase">
+        <label className="block text-xs font-mono text-slate-600 dark:text-[#8A8A8E] mb-1.5 uppercase font-medium">
           Project Details / Message *
         </label>
         <textarea
           {...register('message')}
           rows={4}
           placeholder="Hi Guruvishnu, we're building a high-performance React application..."
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-[#4F8CFF] transition-colors resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-blue-500 dark:focus:border-[#4F8CFF] focus:ring-1 focus:ring-blue-500/30 transition-colors resize-none"
         />
         {errors.message && (
-          <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+          <p className="text-xs text-red-500 dark:text-red-400 mt-1 flex items-center gap-1 font-mono">
             <AlertCircle className="w-3 h-3" />
             {errors.message.message}
           </p>
