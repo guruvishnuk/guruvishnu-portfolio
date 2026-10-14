@@ -73,10 +73,10 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
     <div className="w-full flex flex-col items-center">
       {/* Top Floating Control Bar */}
       {showControls && (
-        <div className="w-full max-w-4xl mb-4 p-3 rounded-2xl glass-card flex flex-wrap items-center justify-between gap-3 shadow-xl print:hidden">
+        <div className="w-full max-w-4xl mb-4 p-3 rounded-2xl glass-card flex flex-wrap items-center justify-between gap-3 shadow-md dark:shadow-xl print:hidden">
           <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#4F8CFF]/20 border border-[#4F8CFF]/50 text-xs font-mono font-semibold text-[#4F8CFF]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 dark:bg-[#4F8CFF]/20 border border-blue-500/25 dark:border-[#4F8CFF]/50 text-xs font-mono font-semibold text-blue-600 dark:text-[#4F8CFF]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
               LIVE RESUME DOCUMENT
             </span>
             <span className="hidden sm:inline text-xs text-[var(--theme-text-secondary)]">
@@ -87,16 +87,16 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopyText}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/15 border border-black/10 dark:border-white/10 text-xs font-medium text-black dark:text-white transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/15 border border-slate-200 dark:border-white/10 text-xs font-medium text-slate-800 dark:text-white transition-all cursor-pointer shadow-sm dark:shadow-none"
               title="Copy plain text resume to clipboard"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#38BDF8]" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-blue-600 dark:text-[#38BDF8]" />}
               <span>{copied ? 'Copied!' : 'Copy Text'}</span>
             </button>
 
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4F8CFF] hover:bg-[#3B72E6] text-xs font-semibold text-white shadow-lg shadow-[#4F8CFF]/25 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-[#4F8CFF] dark:hover:bg-[#3B72E6] text-xs font-semibold text-white shadow-md dark:shadow-lg dark:shadow-[#4F8CFF]/25 transition-all cursor-pointer"
               title="Print or Save PDF"
             >
               <Printer className="w-3.5 h-3.5" />
@@ -106,7 +106,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
             {onClose && (
               <button
                 onClick={onClose}
-                className="px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/10 hover:bg-red-500/20 hover:text-red-500 dark:hover:text-red-400 text-xs font-medium text-[var(--theme-text-secondary)] border border-black/10 dark:border-white/10 transition-all cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 hover:bg-red-500/15 hover:text-red-600 dark:hover:text-red-400 text-xs font-medium text-[var(--theme-text-secondary)] border border-slate-200 dark:border-white/10 transition-all cursor-pointer"
               >
                 Close
               </button>
@@ -116,18 +116,18 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
       )}
 
       {/* A4 Paper Document Container */}
-      <div className="w-full max-w-4xl bg-[#FFFFFF] text-[#1A1A1A] dark:bg-[#0F141C] dark:text-[#E6EDF3] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden p-6 sm:p-10 md:p-12 font-serif transition-colors print:p-0 print:border-none print:shadow-none print:bg-white print:text-black">
+      <div className="w-full max-w-4xl bg-white text-slate-900 dark:bg-[#0F141C] dark:text-[#E6EDF3] border border-slate-200 dark:border-white/10 rounded-2xl shadow-xl dark:shadow-2xl overflow-hidden p-6 sm:p-10 md:p-12 font-serif transition-colors print:p-0 print:border-none print:shadow-none print:bg-white print:text-black">
         {/* RESUME HEADER */}
-        <header className="border-b border-black/15 dark:border-white/15 pb-6 mb-6 text-center sm:text-left">
+        <header className="border-b border-slate-200 dark:border-white/15 pb-6 mb-6 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl sm:text-4xl font-bold tracking-tight font-sans text-black dark:text-white print:text-black">
+              <h1 className="text-3xl sm:text-4xl font-bold tracking-tight font-sans text-slate-900 dark:text-white print:text-black">
                 {RESUME_DATA.name}
               </h1>
-              <p className="text-sm font-sans font-medium text-[#2563EB] dark:text-[#60A5FA] mt-1 print:text-[#2563EB]">
+              <p className="text-sm font-sans font-semibold text-blue-600 dark:text-[#60A5FA] mt-1 print:text-[#2563EB]">
                 {RESUME_DATA.title}
               </p>
-              <p className="text-xs font-sans text-neutral-600 dark:text-neutral-400 mt-0.5 print:text-neutral-600">
+              <p className="text-xs font-sans text-slate-600 dark:text-neutral-400 mt-0.5 print:text-neutral-600">
                 📍 {RESUME_DATA.location}
               </p>
             </div>
@@ -138,7 +138,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
                 href={RESUME_DATA.github}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 text-[#2563EB] dark:text-[#60A5FA] hover:underline print:text-black"
+                className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
               >
                 <Github className="w-3.5 h-3.5" />
                 <span>github.com/guruvishnuk</span>
@@ -147,21 +147,21 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
                 href={RESUME_DATA.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 text-[#2563EB] dark:text-[#60A5FA] hover:underline print:text-black"
+                className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
               >
                 <Linkedin className="w-3.5 h-3.5" />
                 <span>linkedin.com/in/guruvishnu-kajagar</span>
               </a>
               <a
                 href={`mailto:${RESUME_DATA.email}`}
-                className="flex items-center gap-1.5 text-[#2563EB] dark:text-[#60A5FA] hover:underline print:text-black"
+                className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
               >
                 <Mail className="w-3.5 h-3.5" />
                 <span>{RESUME_DATA.email}</span>
               </a>
               <a
                 href={`tel:${RESUME_DATA.phone}`}
-                className="flex items-center gap-1.5 text-[#2563EB] dark:text-[#60A5FA] hover:underline print:text-black"
+                className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
               >
                 <Phone className="w-3.5 h-3.5" />
                 <span>{RESUME_DATA.phone}</span>
@@ -172,10 +172,10 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
 
         {/* SECTION: PROFESSIONAL SUMMARY */}
         <section className="mb-6">
-          <h2 className="text-xs font-mono uppercase tracking-widest font-bold text-neutral-500 dark:text-neutral-400 border-b border-black/10 dark:border-white/10 pb-1 mb-2">
+          <h2 className="text-xs font-mono uppercase tracking-widest font-bold text-slate-500 dark:text-neutral-400 border-b border-slate-200 dark:border-white/10 pb-1 mb-2">
             Professional Summary
           </h2>
-          <p className="text-xs sm:text-sm font-sans leading-relaxed text-neutral-800 dark:text-neutral-200 print:text-black">
+          <p className="text-xs sm:text-sm font-sans leading-relaxed text-slate-700 dark:text-neutral-200 print:text-black">
             {RESUME_DATA.summary}
           </p>
         </section>
