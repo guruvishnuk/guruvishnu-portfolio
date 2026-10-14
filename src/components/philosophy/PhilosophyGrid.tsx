@@ -20,10 +20,10 @@ export const PhilosophyGrid: React.FC = () => {
     <section id="philosophy" className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <Badge variant="pulse">Code Philosophy & Craft</Badge>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F5F5F7]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-[#F5F5F7]">
           How I Build Software
         </h2>
-        <p className="text-[#8A8A8E] text-base md:text-lg">
+        <p className="text-slate-600 dark:text-[#8A8A8E] text-base md:text-lg">
           Engineering principles focused on technical rigor, performance profiling, and maintainable systems.
         </p>
       </div>
@@ -44,24 +44,24 @@ export const PhilosophyGrid: React.FC = () => {
             <GlassCard
               glow
               className={`h-full flex flex-col justify-between p-6 sm:p-8 ${
-                item.highlight ? 'border-[#4F8CFF]/30 bg-[#4F8CFF]/5' : ''
+                item.highlight ? 'border-blue-500/30 bg-blue-500/5 dark:border-[#4F8CFF]/30 dark:bg-[#4F8CFF]/5' : ''
               }`}
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-                    {iconMap[item.id] || <Zap className="w-6 h-6 text-[#4F8CFF]" />}
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
+                    {iconMap[item.id] || <Zap className="w-6 h-6 text-blue-600 dark:text-[#4F8CFF]" />}
                   </div>
                   {item.highlight && (
                     <Badge variant="accent">Core Differentiator</Badge>
                   )}
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F7]">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-[#F5F5F7]">
                   {item.title}
                 </h3>
-                <p className="text-xs font-mono text-[#4F8CFF]">"{item.quote}"</p>
-                <p className="text-[#8A8A8E] text-sm leading-relaxed font-sans">
+                <p className="text-xs font-mono text-[#0066CC] dark:text-[#4F8CFF] font-semibold">"{item.quote}"</p>
+                <p className="text-slate-600 dark:text-[#8A8A8E] text-sm leading-relaxed font-sans">
                   {item.description}
                 </p>
               </div>
