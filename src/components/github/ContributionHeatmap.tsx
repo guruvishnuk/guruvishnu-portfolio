@@ -7,9 +7,9 @@ export const ContributionHeatmap: React.FC = () => {
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs font-mono text-[#8A8A8E]">
+      <div className="flex items-center justify-between text-xs font-mono text-slate-600 dark:text-[#8A8A8E] font-medium">
         <span>Contribution Activity (2025 - 2026)</span>
-        <span className="text-[#4F8CFF] font-semibold">482 Commits</span>
+        <span className="text-blue-600 dark:text-[#4F8CFF] font-semibold">482 Commits</span>
       </div>
 
       <div className="overflow-x-auto pb-2">
@@ -17,11 +17,11 @@ export const ContributionHeatmap: React.FC = () => {
           {Array.from({ length: weeks * days }).map((_, idx) => {
             // Pseudo commit density calculation
             const seed = (idx * 17 + 5) % 100;
-            let intensityClass = 'bg-white/5 border border-white/5';
-            if (seed > 75) intensityClass = 'bg-[#4F8CFF] shadow-[0_0_8px_#4F8CFF]';
-            else if (seed > 50) intensityClass = 'bg-[#4F8CFF]/70';
-            else if (seed > 30) intensityClass = 'bg-[#4F8CFF]/40';
-            else if (seed > 15) intensityClass = 'bg-[#4F8CFF]/20';
+            let intensityClass = 'bg-slate-200/80 dark:bg-white/5 border border-slate-300/40 dark:border-white/5';
+            if (seed > 75) intensityClass = 'bg-blue-600 dark:bg-[#4F8CFF] shadow-[0_0_8px_rgba(79,140,255,0.4)]';
+            else if (seed > 50) intensityClass = 'bg-blue-500/80 dark:bg-[#4F8CFF]/70';
+            else if (seed > 30) intensityClass = 'bg-blue-400/60 dark:bg-[#4F8CFF]/40';
+            else if (seed > 15) intensityClass = 'bg-blue-300/50 dark:bg-[#4F8CFF]/20';
 
             return (
               <div
@@ -34,13 +34,13 @@ export const ContributionHeatmap: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2 text-[10px] font-mono text-[#8A8A8E]">
+      <div className="flex items-center justify-end gap-2 text-[10px] font-mono text-slate-500 dark:text-[#8A8A8E]">
         <span>Less</span>
         <div className="flex gap-1">
-          <span className="w-2.5 h-2.5 rounded-sm bg-white/5" />
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#4F8CFF]/20" />
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#4F8CFF]/50" />
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#4F8CFF]" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-slate-200 dark:bg-white/5" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-blue-300/50 dark:bg-[#4F8CFF]/20" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-blue-500/80 dark:bg-[#4F8CFF]/50" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-blue-600 dark:bg-[#4F8CFF]" />
         </div>
         <span>More</span>
       </div>
