@@ -88,6 +88,14 @@ export const skillsData: SkillCategory[] = [
   },
   {
     ring: 'Craft',
+    name: 'Vite & Web Tooling',
+    iconName: 'Code',
+    description: 'Fast HMR, Rollup Bundling, Code Splitting, Bundle Size Optimization',
+    level: 'Proficient',
+    context: 'Architecture of fast development pipelines and ultra-optimized modern production bundles.',
+  },
+  {
+    ring: 'Craft',
     name: 'Git & GitHub',
     iconName: 'GitBranch',
     description: 'Version Control, Feature Branching, Pull Requests & Agile Workflows',
