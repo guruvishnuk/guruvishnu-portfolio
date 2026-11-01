@@ -18,6 +18,8 @@
 - **📊 Real-Time GitHub Telemetry**: Live GitHub REST API integration displaying recent commits, language distribution, and a contribution heatmap.
 - **🌌 Solar System Skills Orbit**: Dynamic 3-tier orbital system (`Core`, `Backend`, `Craft`) with interactive skill popovers and level metrics.
 - **💻 macOS Terminal Boot Simulator**: Custom typing sequence emulator demonstrating command initialization and hire status.
+- **📝 Live Dev.to Engineering Insights**: Asynchronous Dev.to publication feed with lazy loading and high-contrast glass cards.
+- **📄 Interactive Live Resume Modal**: Dynamic in-browser document viewer with PDF download and quick-action shortcuts.
 - **🎛️ Live Component Playground**: Interactive sandbox allowing visitors to modify theme tokens, animation speeds, and inspect component node trees in real time.
 - **🤖 Guru AI Portfolio Assistant**: Embedded conversational assistant capable of answering questions about skills, experience, and contact details.
 - **🌊 Inertia Smooth Scrolling**: Butter-smooth momentum scrolling powered by `lenis` and custom hooks.
@@ -106,7 +108,7 @@ npm run preview
 ```
 src/
 ├── components/
-│   ├── chatbot/          # Guru AI assistant with contextual responses
+│   ├── blog/             # Live Dev.to articles integration & feed
 │   ├── contact/          # Contact panel and Zod-validated form
 │   ├── dashboard/        # Performance metrics, counters & sparklines
 │   ├── github/           # Live GitHub API telemetry & contribution heatmap
@@ -115,17 +117,19 @@ src/
 │   ├── philosophy/       # Engineering philosophy cards
 │   ├── playground/       # Interactive component sandbox & node tree visualizer
 │   ├── process/          # Hire me workflow steps
-│   ├── profile/          # Flippable 3D profile identity card
 │   ├── projects/         # 3D project galaxy deck & live preview modals
+│   ├── resume/           # Interactive live resume document modal & viewer
 │   ├── roadmap/          # Career milestones and experience timeline
 │   ├── skills-orbit/     # 3-tier orbital skills visualizer
 │   ├── tags/             # Technical tags cloud
 │   ├── terminal/         # macOS terminal typewriter boot emulator
+│   ├── testimonials/     # Peer recommendations & endorsements
 │   └── ui/               # Reusable glass cards, magnetic buttons, custom cursor
+├── context/              # ThemeContext & LiveResumeContext
 ├── data/                 # Static content, metrics, milestones & project data
-├── hooks/                # Custom hooks (Lenis, mouse tracking, typing animation)
+├── hooks/                # Custom hooks (Lenis, mouse tracking, Dev.to, GitHub stats)
 ├── lib/                  # Motion variants & utility helpers
-├── services/             # GitHub API integration & caching
+├── services/             # Gemini AI assistant & caching
 └── types/                # Strict TypeScript interfaces
 ```
 
@@ -137,4 +141,4 @@ src/
 *Frontend Engineer @ CandorWorks*
 - **GitHub**: [@guruvishnuk](https://github.com/guruvishnuk)
 - **LinkedIn**: [guruvishnu-kajagar](https://www.linkedin.com/in/guruvishnu-kajagar-)
-- **Email**: guruvishnu1927@gmail.com
+- **Email**: guruvishnukajagar@gmail.com
