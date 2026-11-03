@@ -96,7 +96,7 @@ function getStaticResponse(query: string): string {
 
   // 9. CONTACT & HIRING
   if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('hire') || q.includes('location') || q.includes('available')) {
-    return 'I’m based in Pune, India, and available immediately for Frontend or Full-Stack roles (Pune, Bangalore, or Remote). You can reach me at guruvishnu1927@gmail.com or via the Contact Control Panel below.';
+    return 'I’m based in Pune, India, and available immediately for Frontend or Full-Stack roles (Pune, Bangalore, or Remote). You can reach me at guruvishnukajagar@gmail.com or via the Contact Control Panel below.';
   }
 
   // Default fallback

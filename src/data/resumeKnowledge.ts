@@ -12,7 +12,7 @@ export const RESUME_DATA = {
   name: "Guruvishnu B Kajagar",
   title: "Frontend Developer / React.js Specialist",
   location: "Pune, India (Available immediately for Pune, Bangalore, or Remote roles)",
-  email: "guruvishnu1927@gmail.com",
+  email: "guruvishnukajagar@gmail.com",
   phone: "+91-9686715615",
   github: "https://github.com/guruvishnuk",
   linkedin: "https://linkedin.com/in/guruvishnu-kajagar",
