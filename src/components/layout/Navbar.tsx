@@ -13,6 +13,7 @@ import {
   Rocket,
   Terminal,
   Code2,
+  BookOpen,
   Send,
   Menu,
   X,
@@ -22,14 +23,14 @@ import {
 
 const navItems = [
   { id: 'hero', label: 'Home', icon: Home },
-  { id: 'live-resume', label: 'Resume', icon: FileText },
   { id: 'roadmap', label: 'Roadmap', icon: Compass },
   { id: 'dashboard', label: 'Metrics', icon: BarChart2 },
   { id: 'skills', label: 'Skills', icon: Cpu },
   { id: 'projects', label: 'Projects', icon: FolderGit2 },
-  { id: 'services', label: 'Services', icon: Rocket },
   { id: 'philosophy', label: 'Craft', icon: Terminal },
   { id: 'playground', label: 'Sandbox', icon: Code2 },
+  { id: 'blog', label: 'Articles', icon: BookOpen },
+  { id: 'services', label: 'Services', icon: Rocket },
   { id: 'contact', label: 'Contact', icon: Send },
 ];
 
