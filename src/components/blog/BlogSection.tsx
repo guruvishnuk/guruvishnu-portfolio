@@ -2,12 +2,12 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { GlassCard } from '../ui/GlassCard';
 import { Badge } from '../ui/Badge';
-import { BookOpen, ExternalLink, Heart, Clock, Loader2 } from 'lucide-react';
+import { BookOpen, ExternalLink, Heart, Clock, Loader2, RotateCw } from 'lucide-react';
 import { useDevto } from '../../hooks/useDevto';
 import { fadeInUp, staggerContainer } from '../../lib/motion-variants';
 
 export const BlogSection: React.FC = () => {
-  const { posts, loading } = useDevto();
+  const { posts, loading, error, refetch } = useDevto();
 
   return (
     <section id="blog" className="py-24 px-6 max-w-7xl mx-auto relative">
@@ -24,6 +24,29 @@ export const BlogSection: React.FC = () => {
       {loading ? (
         <div className="flex justify-center py-12">
           <Loader2 className="w-8 h-8 text-blue-600 dark:text-[#4F8CFF] animate-spin" />
+        </div>
+      ) : error && posts.length === 0 ? (
+        <div className="text-center py-12 p-8 rounded-2xl glass-card border-slate-200 dark:border-white/10 bg-white/80 dark:bg-white/5 max-w-md mx-auto space-y-3 shadow-sm dark:shadow-none">
+          <BookOpen className="w-8 h-8 text-amber-500 mx-auto opacity-80" />
+          <p className="text-sm text-slate-600 dark:text-[#8A8A8E]">Unable to load articles directly right now.</p>
+          <div className="flex items-center justify-center gap-3 pt-2">
+            <button
+              onClick={() => refetch()}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/10 hover:bg-blue-600/20 text-xs font-medium text-blue-600 dark:text-[#4F8CFF] transition-colors cursor-pointer"
+            >
+              <RotateCw className="w-3.5 h-3.5" />
+              <span>Retry</span>
+            </button>
+            <a
+              href="https://dev.to/guruvishnuk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-blue-600 dark:text-[#4F8CFF] hover:underline font-medium"
+            >
+              <span>Visit Dev.to Profile</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
         </div>
       ) : posts.length === 0 ? (
         <div className="text-center py-12 p-8 rounded-2xl glass-card border-slate-200 dark:border-white/10 bg-white/80 dark:bg-white/5 max-w-md mx-auto space-y-3 shadow-sm dark:shadow-none">
