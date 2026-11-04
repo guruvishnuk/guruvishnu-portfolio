@@ -82,6 +82,7 @@ export const AIChatWidget: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsOpen(true)}
+              aria-label="Open AI Assistant Chat"
               className="w-14 h-14 rounded-full bg-[#4F8CFF] text-white shadow-lg flex items-center justify-center relative group"
             >
               <ContextualHint id="chat-hint" text="Ask me anything!" position="top" delay={1000} />
@@ -114,6 +115,7 @@ export const AIChatWidget: React.FC = () => {
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
+                  aria-label="Close AI Assistant Chat"
                   className="p-1 rounded-md text-[var(--theme-text-secondary)] hover:text-[var(--theme-text-primary)] hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <X className="w-4 h-4" />
@@ -181,11 +183,13 @@ export const AIChatWidget: React.FC = () => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask about my experience..."
+                    aria-label="Ask about Guruvishnu's experience"
                     className="flex-1 bg-black/5 dark:bg-white/5 border border-[var(--glass-border)] rounded-xl px-4 py-2 text-xs text-[var(--theme-text-primary)] placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-500 dark:focus:border-[#4F8CFF] transition-colors"
                   />
                   <button 
                     type="submit"
                     disabled={!input.trim() || isTyping}
+                    aria-label="Send message"
                     className="w-8 h-8 rounded-lg bg-blue-600 dark:bg-[#4F8CFF] text-white flex items-center justify-center hover:bg-blue-700 dark:hover:bg-[#3b6ecc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed absolute right-1 top-1 cursor-pointer"
                   >
                     <Send className="w-3 h-3" />

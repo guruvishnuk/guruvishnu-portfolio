@@ -26,6 +26,7 @@ export const Footer: React.FC = () => {
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-[#4F8CFF] dark:hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
             title="GitHub"
+            aria-label="Guruvishnu's GitHub Profile"
             data-cursor="hover"
           >
             <Github className="w-4 h-4" />
@@ -36,6 +37,7 @@ export const Footer: React.FC = () => {
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-[#4F8CFF] dark:hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
             title="LinkedIn"
+            aria-label="Guruvishnu's LinkedIn Profile"
             data-cursor="hover"
           >
             <Linkedin className="w-4 h-4" />
@@ -44,6 +46,7 @@ export const Footer: React.FC = () => {
             href="mailto:guruvishnukajagar@gmail.com"
             className="p-3 rounded-full bg-slate-200/60 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-600 dark:text-[#8A8A8E] hover:text-[#4F8CFF] dark:hover:text-[#4F8CFF] hover:border-[#4F8CFF]/40 transition-colors"
             title="Email"
+            aria-label="Send email to Guruvishnu"
             data-cursor="hover"
           >
             <Mail className="w-4 h-4" />
@@ -59,6 +62,7 @@ export const Footer: React.FC = () => {
           <button
             onClick={scrollToTop}
             className="flex items-center gap-2 text-slate-600 hover:text-slate-900 dark:text-[#8A8A8E] dark:hover:text-white transition-colors cursor-pointer group"
+            aria-label="Scroll back to top of page"
             data-cursor="hover"
           >
             <span>Back to top</span>

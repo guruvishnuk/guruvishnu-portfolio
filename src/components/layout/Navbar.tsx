@@ -94,6 +94,7 @@ export const Navbar: React.FC = () => {
               onClick={() => scrollToSection('hero')}
               className="group flex items-center justify-center p-2 mr-1 rounded-full hover:bg-slate-200/60 dark:hover:bg-white/10 transition-colors shrink-0 cursor-pointer"
               title="Guruvishnu Kajagar"
+              aria-label="Guruvishnu Kajagar Home"
               data-cursor="hover"
             >
               <svg className="w-5 h-5" viewBox="0 0 100 100" fill="none">
@@ -162,6 +163,7 @@ export const Navbar: React.FC = () => {
               <button
                 onClick={() => scrollToSection('hero')}
                 className="flex items-center gap-2 p-1.5 rounded-full hover:bg-slate-200/60 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                aria-label="Guruvishnu Kajagar Home"
               >
                 <svg className="w-5 h-5" viewBox="0 0 100 100" fill="none">
                   <path
@@ -184,6 +186,8 @@ export const Navbar: React.FC = () => {
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#4F8CFF]/15 border border-[#4F8CFF]/40 text-xs font-semibold text-blue-700 dark:text-[#4F8CFF] shadow-xs cursor-pointer"
+                aria-label="Select section menu"
+                aria-expanded={isMobileMenuOpen}
               >
                 <ActiveIcon className="w-3.5 h-3.5 text-[#4F8CFF]" />
                 <span>{activeItem.label}</span>
@@ -196,6 +200,7 @@ export const Navbar: React.FC = () => {
                   onClick={() => openLiveResume()}
                   className="p-2 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/25 transition-colors cursor-pointer"
                   title="View Live Resume"
+                  aria-label="View Live Resume"
                 >
                   <FileText className="w-4 h-4" />
                 </button>
@@ -208,6 +213,7 @@ export const Navbar: React.FC = () => {
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   className="p-2 rounded-full bg-slate-200/60 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 hover:bg-slate-300/60 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer"
                   aria-label="Toggle Navigation Menu"
+                  aria-expanded={isMobileMenuOpen}
                 >
                   {isMobileMenuOpen ? <X className="w-4 h-4 text-red-500" /> : <Menu className="w-4 h-4 text-[#4F8CFF]" />}
                 </button>
