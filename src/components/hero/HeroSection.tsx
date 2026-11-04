@@ -86,9 +86,8 @@ export const HeroSection: React.FC = () => {
 
             <MagneticButton
               variant="glass"
-              asAnchor
-              href="/Guruvishnu_Kajagar_Resume.pdf"
-              target="_blank"
+              onClick={() => openLiveResume()}
+              title="Open Live Resume to print or export PDF"
             >
               <Download className="w-4 h-4 text-[#4F8CFF]" />
               <span>Download PDF</span>

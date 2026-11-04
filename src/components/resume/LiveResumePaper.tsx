@@ -35,8 +35,8 @@ export const LiveResumePaper: React.FC<LiveResumePaperProps> = ({ onClose, showC
   const handleCopyText = () => {
     const text = `
 GURUVISHNU B KAJAGAR
-Pune, India | guruvishnu1927@gmail.com | +91-9686715615
-GitHub: https://github.com/guruvishnuk | LinkedIn: https://linkedin.com/in/guruvishnu-kajagar | Portfolio: https://guruvishnuk.dev
+${RESUME_DATA.location.split('(')[0].trim()} | ${RESUME_DATA.email} | ${RESUME_DATA.phone}
+GitHub: ${RESUME_DATA.github} | LinkedIn: ${RESUME_DATA.linkedin} | Portfolio: ${RESUME_DATA.portfolio}
 
 SUMMARY
 ${RESUME_DATA.summary}

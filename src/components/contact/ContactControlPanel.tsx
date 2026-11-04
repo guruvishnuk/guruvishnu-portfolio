@@ -3,8 +3,11 @@ import { GlassCard } from '../ui/GlassCard';
 import { Badge } from '../ui/Badge';
 import { ContactForm } from './ContactForm';
 import { Mail, Linkedin, Github, FileText, Radio, MapPin, Clock } from 'lucide-react';
+import { useLiveResume } from '../../context/LiveResumeContext';
 
 export const ContactControlPanel: React.FC = () => {
+  const { openLiveResume } = useLiveResume();
+
   return (
     <section id="contact" className="py-24 px-6 max-w-7xl mx-auto relative">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
@@ -93,20 +96,21 @@ export const ContactControlPanel: React.FC = () => {
                 </span>
               </a>
 
-              <a
-                href="/Guruvishnu_Kajagar_Resume.pdf"
-                target="_blank"
-                className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-[#4F8CFF]/50 flex items-center justify-between group transition-colors shadow-sm dark:shadow-none"
+              <button
+                type="button"
+                onClick={() => openLiveResume()}
+                className="w-full p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-[#4F8CFF]/50 flex items-center justify-between group transition-colors shadow-sm dark:shadow-none text-left cursor-pointer"
                 data-cursor="hover"
+                title="Open Live Resume and Export PDF"
               >
                 <div className="flex items-center gap-3">
                   <FileText className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-slate-900 dark:text-[#F5F5F7] font-semibold">PDF Resume</span>
+                  <span className="text-slate-900 dark:text-[#F5F5F7] font-semibold">Live Resume</span>
                 </div>
                 <span className="text-slate-600 dark:text-[#8A8A8E] group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                  Download .pdf
+                  View &amp; Export PDF
                 </span>
-              </a>
+              </button>
             </div>
           </GlassCard>
         </div>
