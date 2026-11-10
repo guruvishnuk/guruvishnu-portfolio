@@ -32,6 +32,7 @@ export const BlogSection: React.FC = () => {
           <div className="flex items-center justify-center gap-3 pt-2">
             <button
               onClick={() => refetch()}
+              aria-label="Retry loading articles"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/10 hover:bg-blue-600/20 text-xs font-medium text-blue-600 dark:text-[#4F8CFF] transition-colors cursor-pointer"
             >
               <RotateCw className="w-3.5 h-3.5" />
@@ -41,6 +42,7 @@ export const BlogSection: React.FC = () => {
               href="https://dev.to/guruvishnuk"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit Guruvishnu Dev.to profile"
               className="inline-flex items-center gap-1.5 text-xs text-blue-600 dark:text-[#4F8CFF] hover:underline font-medium"
             >
               <span>Visit Dev.to Profile</span>

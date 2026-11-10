@@ -52,6 +52,7 @@ export const ContactControlPanel: React.FC = () => {
             <div className="space-y-3 font-mono text-xs">
               <a
                 href="mailto:guruvishnukajagar@gmail.com"
+                aria-label="Send email to guruvishnukajagar@gmail.com"
                 className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-[#4F8CFF]/50 flex items-center justify-between group transition-colors shadow-sm dark:shadow-none"
                 data-cursor="hover"
               >
@@ -66,6 +67,7 @@ export const ContactControlPanel: React.FC = () => {
 
               <a
                 href="https://www.linkedin.com/in/guruvishnu-kajagar-/"
+                aria-label="Visit Guruvishnu LinkedIn Profile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-[#4F8CFF]/50 flex items-center justify-between group transition-colors shadow-sm dark:shadow-none"
@@ -82,6 +84,7 @@ export const ContactControlPanel: React.FC = () => {
 
               <a
                 href="https://github.com/guruvishnuk"
+                aria-label="Visit Guruvishnu GitHub Profile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-[#4F8CFF]/50 flex items-center justify-between group transition-colors shadow-sm dark:shadow-none"
@@ -102,6 +105,7 @@ export const ContactControlPanel: React.FC = () => {
                 className="w-full p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-[#4F8CFF]/50 flex items-center justify-between group transition-colors shadow-sm dark:shadow-none text-left cursor-pointer"
                 data-cursor="hover"
                 title="Open Live Resume and Export PDF"
+                aria-label="Open Live Resume and Export PDF"
               >
                 <div className="flex items-center gap-3">
                   <FileText className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />

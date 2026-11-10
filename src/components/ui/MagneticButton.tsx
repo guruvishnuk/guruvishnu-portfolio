@@ -69,15 +69,16 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   );
 
   if (asAnchor && href) {
+    const safeRel = rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined);
     return (
-      <a href={href} target={target} rel={rel} className="inline-block">
+      <a href={href} target={target} rel={safeRel} className="inline-block">
         {content}
       </a>
     );
   }
 
   return (
-    <button onClick={onClick} className="inline-block border-none bg-transparent p-0 outline-none" {...props}>
+    <button type="button" onClick={onClick} className="inline-block border-none bg-transparent p-0 outline-none" {...props}>
       {content}
     </button>
   );
