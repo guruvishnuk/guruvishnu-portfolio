@@ -17,6 +17,16 @@ export const LiveResumeModal: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, closeLiveResume]);
 
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -32,6 +42,9 @@ export const LiveResumeModal: React.FC = () => {
 
           {/* Modal Content */}
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="live-resume-modal-title"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -45,7 +58,7 @@ export const LiveResumeModal: React.FC = () => {
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-[var(--theme-text-primary)] flex items-center gap-2">
+                  <h3 id="live-resume-modal-title" className="text-base sm:text-lg font-bold text-[var(--theme-text-primary)] flex items-center gap-2">
                     <span>Live Interactive Resume</span>
                     <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#4F8CFF]/20 border border-[#4F8CFF]/50 text-[#38BDF8]">
                       <Sparkles className="w-3 h-3 animate-pulse" /> Official PDF Model

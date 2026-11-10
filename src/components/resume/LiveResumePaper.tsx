@@ -89,6 +89,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
               onClick={handleCopyText}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/15 border border-slate-200 dark:border-white/10 text-xs font-medium text-slate-800 dark:text-white transition-all cursor-pointer shadow-sm dark:shadow-none"
               title="Copy plain text resume to clipboard"
+              aria-label="Copy plain text resume to clipboard"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-blue-600 dark:text-[#38BDF8]" />}
               <span>{copied ? 'Copied!' : 'Copy Text'}</span>
@@ -98,6 +99,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
               onClick={handlePrint}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-[#4F8CFF] dark:hover:bg-[#3B72E6] text-xs font-semibold text-white shadow-md dark:shadow-lg dark:shadow-[#4F8CFF]/25 transition-all cursor-pointer"
               title="Print or Save PDF"
+              aria-label="Print or Export PDF"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print / Export PDF</span>
@@ -106,6 +108,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
             {onClose && (
               <button
                 onClick={onClose}
+                aria-label="Close Live Resume"
                 className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 hover:bg-red-500/15 hover:text-red-600 dark:hover:text-red-400 text-xs font-medium text-[var(--theme-text-secondary)] border border-slate-200 dark:border-white/10 transition-all cursor-pointer"
               >
                 Close
@@ -136,6 +139,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
             <div className="flex flex-wrap sm:flex-col items-start sm:items-end justify-center gap-1.5 text-xs font-sans">
               <a
                 href={RESUME_DATA.github}
+                aria-label="Guruvishnu GitHub Profile"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
@@ -145,6 +149,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
               </a>
               <a
                 href={RESUME_DATA.linkedin}
+                aria-label="Guruvishnu LinkedIn Profile"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
@@ -154,6 +159,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
               </a>
               <a
                 href={`mailto:${RESUME_DATA.email}`}
+                aria-label="Email Guruvishnu"
                 className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -161,6 +167,7 @@ ${RESUME_DATA.certifications.map(c => `• ${c.title} (${c.issuer}): ${c.descrip
               </a>
               <a
                 href={`tel:${RESUME_DATA.phone}`}
+                aria-label="Call Guruvishnu"
                 className="flex items-center gap-1.5 text-blue-600 dark:text-[#60A5FA] hover:underline print:text-black"
               >
                 <Phone className="w-3.5 h-3.5" />
