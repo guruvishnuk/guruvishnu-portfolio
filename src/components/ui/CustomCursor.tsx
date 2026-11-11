@@ -8,9 +8,12 @@ export const CustomCursor: React.FC = () => {
   const prefersReduced = useReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    if (prefersReduced) return;
+    const isTouch = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+    setIsTouchDevice(isTouch);
+    if (prefersReduced || isTouch) return;
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -41,7 +44,7 @@ export const CustomCursor: React.FC = () => {
     };
   }, [prefersReduced]);
 
-  if (prefersReduced || !isVisible) return null;
+  if (prefersReduced || isTouchDevice || !isVisible) return null;
 
   return (
     <>
