@@ -18,6 +18,9 @@ export function useGithubStats() {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
     async function fetchGithubStats() {
       // 1. Try reading valid cached stats from sessionStorage to prevent hitting API rate limits
       try {
@@ -38,7 +41,7 @@ export function useGithubStats() {
         setLoading(true);
 
         // Fetch user data
-        const userRes = await fetch(`https://api.github.com/users/${USERNAME}`);
+        const userRes = await fetch(`https://api.github.com/users/${USERNAME}`, { signal });
         if (userRes.status === 403) {
           // Gracefully fallback to static state on GitHub rate limiting
           setLoading(false);
@@ -49,7 +52,7 @@ export function useGithubStats() {
         const totalRepositories = userData.public_repos;
 
         // Fetch repos to calculate languages and latest commits
-        const reposRes = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=10`);
+        const reposRes = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=10`, { signal });
         if (reposRes.status === 403) {
           setLoading(false);
           return;
@@ -57,39 +60,43 @@ export function useGithubStats() {
         if (!reposRes.ok) throw new Error(`Failed to fetch repos: ${reposRes.status}`);
         const repos = await reposRes.json();
 
-        // Calculate language stats
+        // Calculate language stats and latest commits concurrently
         const languages: Record<string, number> = {};
         let totalLangSize = 0;
-        
-        // Latest commits
         const latestCommits: CommitActivity[] = [];
 
-        // Fetch language breakdown and commits for top 3 recently updated repos
-        for (let i = 0; i < Math.min(3, repos.length); i++) {
-          const repo = repos[i];
-          
-          // Get languages
-          const langRes = await fetch(repo.languages_url);
-          if (langRes.ok) {
-            const langData = await langRes.json();
-            Object.keys(langData).forEach((lang) => {
-              languages[lang] = (languages[lang] || 0) + langData[lang];
-              totalLangSize += langData[lang];
-            });
-          }
+        const topRepos = repos.slice(0, 3);
+        const repoDetails = await Promise.all(
+          topRepos.map(async (repo: any) => {
+            const [langRes, commitsRes] = await Promise.all([
+              fetch(repo.languages_url, { signal }).catch(() => null),
+              fetch(`https://api.github.com/repos/${USERNAME}/${repo.name}/commits?per_page=2`, { signal }).catch(() => null),
+            ]);
 
-          // Get commits
-          const commitsRes = await fetch(`https://api.github.com/repos/${USERNAME}/${repo.name}/commits?per_page=2`);
-          if (commitsRes.ok) {
-            const commitsData = await commitsRes.json();
+            const langData = langRes && langRes.ok ? await langRes.json().catch(() => ({})) : {};
+            const commitsData = commitsRes && commitsRes.ok ? await commitsRes.json().catch(() => []) : [];
+
+            return { repo, langData, commitsData };
+          })
+        );
+
+        for (const { repo, langData, commitsData } of repoDetails) {
+          Object.keys(langData).forEach((lang) => {
+            languages[lang] = (languages[lang] || 0) + langData[lang];
+            totalLangSize += langData[lang];
+          });
+
+          if (Array.isArray(commitsData)) {
             commitsData.forEach((c: any) => {
-              latestCommits.push({
-                repo: repo.name,
-                message: c.commit.message.split('\n')[0],
-                date: new Date(c.commit.committer.date).toLocaleDateString(),
-                branch: repo.default_branch,
-                sha: c.sha.substring(0, 7)
-              });
+              if (c?.commit) {
+                latestCommits.push({
+                  repo: repo.name,
+                  message: c.commit.message.split('\n')[0],
+                  date: new Date(c.commit.committer.date).toLocaleDateString(),
+                  branch: repo.default_branch,
+                  sha: c.sha.substring(0, 7)
+                });
+              }
             });
           }
         }
@@ -117,15 +124,25 @@ export function useGithubStats() {
           // Ignore cache write errors
         }
 
-        setStats(freshStats);
+        if (!signal.aborted) {
+          setStats(freshStats);
+        }
       } catch (err: any) {
-        setError(err);
+        if (err.name !== 'AbortError') {
+          setError(err);
+        }
       } finally {
-        setLoading(false);
+        if (!signal.aborted) {
+          setLoading(false);
+        }
       }
     }
 
     fetchGithubStats();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return { stats, loading, error };
