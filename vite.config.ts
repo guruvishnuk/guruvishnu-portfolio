@@ -3,8 +3,40 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
+function smtpDevPlugin() {
+  return {
+    name: 'smtp-dev-api',
+    configureServer(server: any) {
+      server.middlewares.use(async (req: any, res: any, next: any) => {
+        if (req.url === '/api/project-inquiry' && req.method === 'POST') {
+          let body = '';
+          req.on('data', (chunk: any) => {
+            body += chunk;
+          });
+          req.on('end', async () => {
+            try {
+              const data = JSON.parse(body);
+              const { sendProjectInquiry } = await import('./server/smtpHandler.js');
+              const result = await sendProjectInquiry(data);
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = 200;
+              res.end(JSON.stringify(result));
+            } catch (error: any) {
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = 500;
+              res.end(JSON.stringify({ error: error.message || 'SMTP transmission error' }));
+            }
+          });
+          return;
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), smtpDevPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

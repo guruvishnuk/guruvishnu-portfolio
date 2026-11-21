@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node server.js",
     "build": "tsc && vite build",
     "lint": "tsc --noEmit",
     "preview": "vite preview"
@@ -15,10 +16,14 @@
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.0.4",
     "clsx": "^2.1.1",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
     "gsap": "^3.12.7",
     "lenis": "^1.1.20",
     "lucide-react": "^0.475.0",
     "motion": "^12.4.7",
+    "nodemailer": "^10.6.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
@@ -29,7 +34,10 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.7",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^22.13.4",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/three": "^0.173.0",

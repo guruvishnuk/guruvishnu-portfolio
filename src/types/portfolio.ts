@@ -68,3 +68,16 @@ export interface CommitActivity {
   branch: string;
   sha: string;
 }
+
+export interface ProjectInquiryData {
+  clientName: string;
+  clientEmail: string;
+  company?: string;
+  projectTitle: string;
+  projectType: string;
+  budgetRange: string;
+  timeline: string;
+  features: string[];
+  projectDescription: string;
+}
+
