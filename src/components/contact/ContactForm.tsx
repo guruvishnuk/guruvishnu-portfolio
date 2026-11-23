@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'motion/react';
-import { MagneticButton } from '../ui/MagneticButton';
 import {
   Send,
   CheckCircle2,
@@ -16,7 +15,11 @@ import {
   ShieldCheck,
   Check,
   RotateCcw,
+  Mail,
+  ExternalLink,
 } from 'lucide-react';
+
+const DESTINATION_EMAIL = 'guruvishnuk.work@gmail.com';
 
 const PROJECT_CATEGORIES = [
   { id: 'fullstack', label: 'Full-Stack Web App', icon: '🌐' },
@@ -42,11 +45,11 @@ const FEATURE_TAGS = [
 ];
 
 const inquirySchema = z.object({
-  clientName: z.string().min(2, { message: 'Name must be at least 2 characters' }),
+  clientName: z.string().min(1, { message: 'Please enter your name' }),
   clientEmail: z.string().email({ message: 'Please enter a valid email address' }),
   company: z.string().optional(),
-  projectTitle: z.string().min(3, { message: 'Please provide a project name or concept' }),
-  projectDescription: z.string().min(15, { message: 'Please describe your project (at least 15 characters)' }),
+  projectTitle: z.string().min(1, { message: 'Please provide a project name or concept' }),
+  projectDescription: z.string().min(3, { message: 'Please describe your project (at least 3 characters)' }),
 });
 
 type InquiryFormData = z.infer<typeof inquirySchema>;
@@ -68,6 +71,7 @@ export const ContactForm: React.FC = () => {
     email: string;
   } | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [lastPayload, setLastPayload] = useState<any | null>(null);
 
   const {
     register,
@@ -76,6 +80,7 @@ export const ContactForm: React.FC = () => {
     reset,
   } = useForm<InquiryFormData>({
     resolver: zodResolver(inquirySchema),
+    mode: 'onTouched',
   });
 
   const toggleFeature = (feature: string) => {
@@ -84,30 +89,59 @@ export const ContactForm: React.FC = () => {
     );
   };
 
+  const onInvalid = (formErrors: any) => {
+    console.warn('Form validation failed:', formErrors);
+    setSubmitError('Please complete all required fields highlighted in red below before submitting.');
+    
+    // Focus the first error element
+    const firstField = Object.keys(formErrors)[0];
+    if (firstField) {
+      const el = document.querySelector(`[name="${firstField}"]`) as HTMLElement;
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.focus();
+      }
+    }
+  };
+
   const onSubmit = async (formData: InquiryFormData) => {
     setSubmitError(null);
+    const payload = {
+      ...formData,
+      projectType: selectedCategory,
+      budgetRange: selectedBudget,
+      timeline: selectedTimeline,
+      features: selectedFeatures,
+    };
+    setLastPayload(payload);
+
     try {
-      const payload = {
-        ...formData,
-        projectType: selectedCategory,
-        budgetRange: selectedBudget,
-        timeline: selectedTimeline,
-        features: selectedFeatures,
-      };
+      let response: Response;
+      try {
+        response = await fetch('/api/project-inquiry', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+      } catch (netErr: any) {
+        throw new Error(
+          `Unable to connect to /api/project-inquiry (${netErr.message || 'Network request failed'}). If testing locally, make sure 'npm run dev' is running.`
+        );
+      }
 
-      const response = await fetch('/api/project-inquiry', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
+      const text = await response.text();
+      let result: any = {};
+      try {
+        result = JSON.parse(text);
+      } catch (jsonErr) {
+        throw new Error(`Server returned HTTP ${response.status}: ${response.statusText || 'Endpoint unavailable'}`);
+      }
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to dispatch project inquiry via SMTP server.');
+        throw new Error(result.error || result.message || `SMTP transmission failed (HTTP ${response.status})`);
       }
 
       setSubmittedData({
@@ -121,16 +155,34 @@ export const ContactForm: React.FC = () => {
       reset();
     } catch (err: any) {
       console.error('SMTP transmission error:', err);
-      setSubmitError(
-        err.message || 'Unable to connect to SMTP mail server. Please ensure the backend is running.'
-      );
+      setSubmitError(err.message || 'Failed to dispatch via SMTP endpoint.');
     }
+  };
+
+  const handleMailtoFallback = () => {
+    if (!lastPayload) return;
+    const subject = encodeURIComponent(
+      `🚀 Project Request: ${lastPayload.projectTitle} from ${lastPayload.clientName}`
+    );
+    const body = encodeURIComponent(
+      `Hi Guruvishnu,\n\nI want to build a project with you:\n\n` +
+      `• Project Goal: ${lastPayload.projectTitle}\n` +
+      `• Category: ${lastPayload.projectType}\n` +
+      `• Estimated Budget: ${lastPayload.budgetRange}\n` +
+      `• Target Timeline: ${lastPayload.timeline}\n` +
+      `• Features Needed: ${lastPayload.features.join(', ') || 'N/A'}\n\n` +
+      `• Scope & Details:\n${lastPayload.projectDescription}\n\n` +
+      `From: ${lastPayload.clientName} (${lastPayload.clientEmail})\n` +
+      `Company: ${lastPayload.company || 'N/A'}`
+    );
+    window.location.href = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   const resetInquiry = () => {
     setIsSubmitted(false);
     setSubmittedData(null);
     setSubmitError(null);
+    setLastPayload(null);
   };
 
   if (isSubmitted && submittedData) {
@@ -152,7 +204,7 @@ export const ContactForm: React.FC = () => {
           <h4 className="text-2xl font-bold text-slate-900 dark:text-white pt-1">Project Request Dispatched!</h4>
           <p className="text-sm text-slate-600 dark:text-[#8A8A8E] max-w-lg mx-auto">
             Your project inquiry for <strong className="text-slate-900 dark:text-white">"{submittedData.title}"</strong> has been securely routed via SMTP directly to{' '}
-            <span className="text-blue-600 dark:text-[#4F8CFF] font-mono font-medium">guruvishnuk.work@gmail.com</span>.
+            <span className="text-blue-600 dark:text-[#4F8CFF] font-mono font-medium">{DESTINATION_EMAIL}</span>.
           </p>
         </div>
 
@@ -178,6 +230,7 @@ export const ContactForm: React.FC = () => {
 
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
+            type="button"
             onClick={resetInquiry}
             className="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-200 dark:border-white/15 text-xs font-mono text-slate-800 dark:text-white flex items-center gap-2 transition-all cursor-pointer font-medium"
           >
@@ -190,7 +243,7 @@ export const ContactForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 font-sans text-left">
+    <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="space-y-6 font-sans text-left" noValidate>
       {/* 1. Project Category Selection */}
       <div className="space-y-2.5">
         <label className="block text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase flex items-center gap-1.5 font-semibold">
@@ -232,7 +285,7 @@ export const ContactForm: React.FC = () => {
         />
         {errors.projectTitle && (
           <p className="text-xs text-red-500 dark:text-red-400 mt-1 flex items-center gap-1 font-mono">
-            <AlertCircle className="w-3 h-3" />
+            <AlertCircle className="w-3 h-3 shrink-0" />
             {errors.projectTitle.message}
           </p>
         )}
@@ -325,12 +378,12 @@ export const ContactForm: React.FC = () => {
         <textarea
           {...register('projectDescription')}
           rows={4}
-          placeholder="Describe what you want built: key user flows, target audience, technical requirements, or any reference websites you admire..."
+          placeholder="Describe what you want built: key user flows, target audience, technical requirements, or reference websites..."
           className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-blue-500 dark:focus:border-[#4F8CFF] transition-colors resize-none"
         />
         {errors.projectDescription && (
           <p className="text-xs text-red-500 dark:text-red-400 mt-1 flex items-center gap-1 font-mono">
-            <AlertCircle className="w-3 h-3" />
+            <AlertCircle className="w-3 h-3 shrink-0" />
             {errors.projectDescription.message}
           </p>
         )}
@@ -350,7 +403,7 @@ export const ContactForm: React.FC = () => {
           />
           {errors.clientName && (
             <p className="text-xs text-red-500 dark:text-red-400 mt-1 flex items-center gap-1 font-mono">
-              <AlertCircle className="w-3 h-3" />
+              <AlertCircle className="w-3 h-3 shrink-0" />
               {errors.clientName.message}
             </p>
           )}
@@ -368,7 +421,7 @@ export const ContactForm: React.FC = () => {
           />
           {errors.clientEmail && (
             <p className="text-xs text-red-500 dark:text-red-400 mt-1 flex items-center gap-1 font-mono">
-              <AlertCircle className="w-3 h-3" />
+              <AlertCircle className="w-3 h-3 shrink-0" />
               {errors.clientEmail.message}
             </p>
           )}
@@ -382,45 +435,62 @@ export const ContactForm: React.FC = () => {
         <input
           {...register('company')}
           type="text"
-          placeholder="e.g. TechCorp / Solo Project"
+          placeholder="e.g. TechCorp / Solo Founder"
           className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#8A8A8E]/60 text-sm focus:outline-none focus:border-blue-500 dark:focus:border-[#4F8CFF] transition-colors"
         />
       </div>
 
-      {/* Error notification */}
+      {/* Error notification banner */}
       {submitError && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-xs font-mono text-red-600 dark:text-red-300 flex items-start gap-2.5">
-          <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 shrink-0 mt-0.5" />
-          <div>
-            <strong className="block font-semibold">SMTP Transmission Notice:</strong>
-            <span>{submitError}</span>
+        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-xs font-mono text-red-600 dark:text-red-300 space-y-2">
+          <div className="flex items-start gap-2">
+            <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 shrink-0 mt-0.5" />
+            <div>
+              <strong className="block font-semibold">Submission Notice:</strong>
+              <span>{submitError}</span>
+            </div>
           </div>
+          {lastPayload && (
+            <button
+              type="button"
+              onClick={handleMailtoFallback}
+              className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-700 dark:text-red-200 border border-red-500/40 text-xs font-semibold cursor-pointer transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5" />
+              <span>Click to Send via Direct Email Client</span>
+              <ExternalLink className="w-3 h-3" />
+            </button>
+          )}
         </div>
       )}
 
-      {/* Security & Protocol Notice */}
-      <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-[#8A8A8E] px-1">
+      {/* Protocol Notice */}
+      <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-500 dark:text-[#8A8A8E] px-1">
         <span className="flex items-center gap-1.5">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
           Encrypted via TLS SMTP Protocol
         </span>
-        <span className="text-blue-600 dark:text-[#4F8CFF]">Target: guruvishnuk.work@gmail.com</span>
+        <span className="text-blue-600 dark:text-[#4F8CFF]">Target: {DESTINATION_EMAIL}</span>
       </div>
 
       {/* Submit Button */}
-      <MagneticButton variant="accent" className="w-full py-4 text-base font-bold shadow-lg">
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full py-4 px-6 rounded-xl font-bold text-base text-white bg-blue-600 hover:bg-blue-500 active:scale-[0.99] transition-all shadow-[0_0_25px_rgba(79,140,255,0.4)] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2 select-none"
+      >
         {isSubmitting ? (
-          <div className="flex items-center justify-center gap-2">
-            <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Transmitting Inquiry via SMTP...</span>
-          </div>
+          <>
+            <Loader2 className="w-5 h-5 animate-spin" />
+            <span>Transmitting via SMTP...</span>
+          </>
         ) : (
-          <div className="flex items-center justify-center gap-2">
+          <>
             <span>Send Project Build Request</span>
             <Send className="w-4 h-4" />
-          </div>
+          </>
         )}
-      </MagneticButton>
+      </button>
     </form>
   );
 };
