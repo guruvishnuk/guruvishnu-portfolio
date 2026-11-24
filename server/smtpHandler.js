@@ -169,7 +169,7 @@ ${projectDescription}
             <p style="margin: 0; color: #94a3b8;"><strong>Selected Budget:</strong> ${budgetRange}</p>
           </div>
           <p style="color: #cbd5e1; line-height: 1.6; font-size: 14px;">
-            I am reviewing your technical requirements and will get back to you within <strong>24 hours</strong> with an architectural overview, milestones, and initial quote.
+            I am reviewing your project details and will get back to you within <strong>24 hours</strong> with next steps and an initial estimate.
           </p>
           <p style="color: #94a3b8; font-size: 13px; margin-top: 24px; border-top: 1px solid #1e293b; padding-top: 16px;">
             Best regards,<br>

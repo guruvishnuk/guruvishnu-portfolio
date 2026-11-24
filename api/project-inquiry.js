@@ -42,9 +42,15 @@ export default async function handler(req, res) {
     const host = process.env.SMTP_HOST || 'smtp.gmail.com';
     const port = Number(process.env.SMTP_PORT) || 587;
     const secure = process.env.SMTP_SECURE === 'true' || port === 465;
-    const user = process.env.SMTP_USER || 'guruvishnuk.work@gmail.com';
-    const pass = process.env.SMTP_PASS || 'fiwphoqioghoatgs';
-    const toEmail = process.env.SMTP_TO || 'guruvishnuk.work@gmail.com';
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+    const toEmail = process.env.SMTP_TO || user || 'guruvishnuk.work@gmail.com';
+
+    if (!user || !pass) {
+      return res.status(500).json({
+        error: 'SMTP credentials are not configured on the server.',
+      });
+    }
 
     const transporter = nodemailer.createTransport({
       host,
@@ -136,7 +142,7 @@ export default async function handler(req, res) {
               Thank you for reaching out! I have received your project inquiry for <strong>${projectTitle}</strong> (<em>${projectType}</em>).
             </p>
             <p style="color: #cbd5e1; line-height: 1.6;">
-              I will review your technical specifications and respond within <strong>24 hours</strong>.
+              I will review your project details and respond within <strong>24 hours</strong> with next steps.
             </p>
             <p style="color: #94a3b8; font-size: 12px; margin-top: 20px;">
               Best regards,<br>
