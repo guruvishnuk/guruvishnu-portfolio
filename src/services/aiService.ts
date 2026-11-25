@@ -59,7 +59,7 @@ function getStaticResponse(query: string): string {
 
   // 4. EXPERIENCE
   if (q.includes('experience') || q.includes('work') || q.includes('candorworks') || q.includes('job') || q.includes('role')) {
-    return "I'm a frontend developer with production experience at CandorWorks. I worked on Alacrity (an import/export logistics platform) where I cut redundant API calls by ~60% and reduced initial bundle size by ~35%. I also built a modular library of 12+ reusable UI components.";
+    return "I'm a frontend developer with production experience at CandorWorks. I worked on Alacrity (an import/export logistics platform) where I reduced redundant API calls by 30%+ and improved page load speed by 25%+. I also built a modular library of 15+ reusable UI components.";
   }
 
   // 5. PROJECTS & CODELAB

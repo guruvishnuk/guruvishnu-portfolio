@@ -28,7 +28,7 @@ export const PerformanceDashboard: React.FC = () => {
 
         <div className="glass-pill px-4 py-2 flex items-center gap-3 text-xs font-mono text-slate-600 dark:text-[#8A8A8E] self-start md:self-auto border border-slate-200 dark:border-white/10">
           <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-          <span>Real Production Metrics</span>
+          <span>Production Engineering Impact</span>
         </div>
       </div>
 

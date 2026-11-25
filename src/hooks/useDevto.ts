@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 
-// Using a well-known dev.to username as a placeholder/fallback until the real user writes articles
-const FALLBACK_USERNAME = 'ben'; 
 const CACHE_KEY_PREFIX = 'gv_devto_articles_cache_';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes cache
 
@@ -25,7 +23,6 @@ export function useDevto(username: string = 'guruvishnuk') {
   const fetchPosts = useCallback(async (signal?: AbortSignal) => {
     const cacheKey = `${CACHE_KEY_PREFIX}${username}`;
 
-    // 1. Try reading valid cached posts from sessionStorage to reduce round-trips
     try {
       const cachedRaw = sessionStorage.getItem(cacheKey);
       if (cachedRaw) {
@@ -44,29 +41,19 @@ export function useDevto(username: string = 'guruvishnuk') {
       setLoading(true);
       setError(null);
 
-      // Try fetching user's actual posts
-      let res = await fetch(`https://dev.to/api/articles?username=${username}&per_page=3`, { signal });
-      let data: BlogPost[] = [];
-
-      if (res.ok) {
-        data = await res.json();
+      const res = await fetch(`https://dev.to/api/articles?username=${username}&per_page=3`, { signal });
+      if (!res.ok) {
+        throw new Error(`Dev.to API returned status ${res.status}`);
       }
 
-      // If user has no posts or returns empty array, fallback to placeholder posts to display UI
-      if (!Array.isArray(data) || data.length === 0) {
-        const fallbackRes = await fetch(`https://dev.to/api/articles?username=${FALLBACK_USERNAME}&per_page=3`, { signal });
-        if (fallbackRes.ok) {
-          data = await fallbackRes.json();
-        }
-      }
+      const data: BlogPost[] = await res.json();
+      const validPosts = Array.isArray(data) ? data : [];
+      setPosts(validPosts);
 
-      if (Array.isArray(data)) {
-        setPosts(data);
-        try {
-          sessionStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
-        } catch {
-          // Ignore cache write errors
-        }
+      try {
+        sessionStorage.setItem(cacheKey, JSON.stringify({ data: validPosts, timestamp: Date.now() }));
+      } catch {
+        // Ignore cache write errors
       }
     } catch (err: any) {
       if (err.name !== 'AbortError') {

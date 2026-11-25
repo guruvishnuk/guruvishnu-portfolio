@@ -32,8 +32,8 @@ export const projectsData: Project[] = [
     approach: 'Built a modular React frontend using Vite, lazy-loaded menu images, implemented Zustand for cart state management, and optimized asset delivery.',
     result: 'Delivered a fast, mobile-first food ordering application with sub-second page transitions and a smooth checkout flow.',
     techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Motion', 'Zustand', 'Vite', 'PHP', 'MySQL'],
-    liveUrl: 'https://freshbites.demo.dev',
-    githubUrl: 'https://github.com/guruvishnuk/fresh-bites',
+    liveUrl: 'https://fresh-bites-foodrecipe.vercel.app',
+    githubUrl: 'https://github.com/guruvishnuk/FreshBites_Foodrecipe',
     mockupType: 'freshbites',
     metrics: [
       { label: 'Load Time', value: '< 1s' },
@@ -52,7 +52,6 @@ export const projectsData: Project[] = [
     approach: 'Developed an intuitive 3-step verification workflow (Biometric check -> OTP verification -> Vote Submission) with client-side payload encryption.',
     result: 'Successfully built a biometric-secured voting portal with 100% vote deduplication across 100+ test voters.',
     techStack: ['React', 'TypeScript', 'Tailwind CSS', 'AES Encryption', 'Node.js', 'Express', 'Python'],
-    liveUrl: 'https://secure-voting.demo.dev',
     githubUrl: 'https://github.com/guruvishnuk/secure-evoting',
     mockupType: 'voting',
     metrics: [
@@ -72,7 +71,6 @@ export const projectsData: Project[] = [
     approach: 'Engineered a modern web platform using React 19, TypeScript, and Vite with interactive architectural deep-dives, philosophy showcases, and responsive developer tooling.',
     result: 'Delivered a clean, high-performance web platform demonstrating modern full-stack development patterns and clean code architecture.',
     techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Node.js', 'Express', 'Motion'],
-    liveUrl: 'https://codelab.demo.dev',
     githubUrl: 'https://github.com/guruvishnuk/codelab',
     mockupType: 'codelab',
     metrics: [

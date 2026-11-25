@@ -66,15 +66,15 @@ export const RESUME_DATA = {
         "Developed an AI-powered conversational resume assistant that interprets recruiter queries and responds with relevant experience, skills, and project information using natural language intent recognition.",
         "Designed an interactive experience roadmap and a performance metrics dashboard using Recharts to visually communicate engineering impact and career progression.",
         "Implemented smooth scrolling and motion design using GSAP, Motion, and Lenis, and integrated the GitHub REST API for live repository and activity data.",
-        "Styled the application with Tailwind CSS v4 and built a component playground demonstrating reusable UI patterns; contact workflow includes schema-based form validation via React Hook Form and Zod, with Formspree backend integration."
+        "Styled the application with Tailwind CSS v4 and built a component playground demonstrating reusable UI patterns; contact workflow includes schema-based form validation via React Hook Form and Zod, with Nodemailer SMTP email integration."
       ]
     },
     {
       name: "Fresh-Bites",
       subtitle: "Recipe & E-Commerce Web Application",
       tech: ["HTML5", "CSS3", "JavaScript", "React", "TypeScript", "Tailwind CSS", "PHP", "MySQL", "Vercel"],
-      demoUrl: "https://freshbites.demo.dev",
-      githubUrl: "https://github.com/guruvishnuk/fresh-bites",
+      demoUrl: "https://fresh-bites-foodrecipe.vercel.app",
+      githubUrl: "https://github.com/guruvishnuk/FreshBites_Foodrecipe",
       details: [
         "Built a responsive, multi-page web application using HTML5, CSS3, and JavaScript with mobile-first design and consistent cross-browser rendering.",
         "Implemented a shopping cart with localStorage, category-based product filtering, and an admin dashboard for order management; PHP + MySQL backend via XAMPP following MVC architecture.",

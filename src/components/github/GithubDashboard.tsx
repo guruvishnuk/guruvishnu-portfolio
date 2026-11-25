@@ -3,14 +3,12 @@ import { motion } from 'motion/react';
 import { GlassCard } from '../ui/GlassCard';
 import { Badge } from '../ui/Badge';
 import { ContributionHeatmap } from './ContributionHeatmap';
-import { githubData as staticGithubData } from '../../data/github';
 import { useGithubStats } from '../../hooks/useGithubStats';
-import { Github, GitCommit, FolderGit2, Code, ArrowUpRight, Loader2 } from 'lucide-react';
+import { Github, GitCommit, FolderGit2, Code, ArrowUpRight, Loader2, RefreshCw, ExternalLink } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../../lib/motion-variants';
 
 export const GithubDashboard: React.FC = () => {
-  const { stats, loading } = useGithubStats();
-  const githubData = stats || staticGithubData;
+  const { stats, loading, error, refetch } = useGithubStats();
 
   return (
     <section id="github" className="py-24 px-6 max-w-7xl mx-auto relative">
@@ -25,17 +23,30 @@ export const GithubDashboard: React.FC = () => {
           </p>
         </div>
 
-        <a
-          href={`https://github.com/guruvishnuk`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="glass-pill px-4 py-2 flex items-center gap-2 text-xs font-mono text-slate-800 dark:text-[#F5F5F7] hover:text-blue-600 dark:hover:text-[#4F8CFF] transition-colors self-start md:self-auto"
-          data-cursor="hover"
-        >
-          <Github className="w-4 h-4 text-blue-600 dark:text-[#4F8CFF]" />
-          <span>@guruvishnuk</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </a>
+        <div className="flex items-center gap-3 self-start md:self-auto">
+          <button
+            type="button"
+            onClick={() => refetch()}
+            disabled={loading}
+            className="glass-pill px-3 py-2 flex items-center gap-2 text-xs font-mono text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer disabled:opacity-50"
+            title="Refresh Live GitHub Data"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+            <span>Sync</span>
+          </button>
+
+          <a
+            href="https://github.com/guruvishnuk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass-pill px-4 py-2 flex items-center gap-2 text-xs font-mono text-slate-800 dark:text-[#F5F5F7] hover:text-blue-600 dark:hover:text-[#4F8CFF] transition-colors"
+            data-cursor="hover"
+          >
+            <Github className="w-4 h-4 text-blue-600 dark:text-[#4F8CFF]" />
+            <span>@guruvishnuk</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
       </div>
 
       <motion.div
@@ -48,95 +59,163 @@ export const GithubDashboard: React.FC = () => {
         {/* Metric Cards Top Row */}
         <motion.div variants={fadeInUp} className="lg:col-span-4">
           <GlassCard className="p-6 h-full flex flex-col justify-between space-y-4 relative">
-            {loading && <div className="absolute top-4 right-4"><Loader2 className="w-4 h-4 text-slate-500 dark:text-[#8A8A8E] animate-spin" /></div>}
+            {loading && (
+              <div className="absolute top-4 right-4">
+                <Loader2 className="w-4 h-4 text-slate-500 dark:text-[#8A8A8E] animate-spin" />
+              </div>
+            )}
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase font-medium">Total Repositories</span>
+              <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase font-medium">
+                Public Repositories
+              </span>
               <FolderGit2 className="w-5 h-5 text-blue-600 dark:text-[#4F8CFF]" />
             </div>
             <div className="text-4xl font-bold text-slate-900 dark:text-white gradient-accent-text">
-              {githubData.totalRepositories}
+              {loading ? '...' : stats ? stats.totalRepositories : '—'}
             </div>
-            <p className="text-xs text-slate-500 dark:text-[#8A8A8E] font-mono">Public repositories & packages</p>
+            <p className="text-xs text-slate-500 dark:text-[#8A8A8E] font-mono">
+              Live count from @guruvishnuk
+            </p>
           </GlassCard>
         </motion.div>
 
         <motion.div variants={fadeInUp} className="lg:col-span-4">
           <GlassCard className="p-6 h-full flex flex-col justify-between space-y-4 relative">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase font-medium">Annual Commits</span>
+              <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase font-medium">
+                Recent Contributions
+              </span>
               <GitCommit className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
             </div>
             <div className="text-4xl font-bold text-slate-900 dark:text-white gradient-accent-text">
-              {githubData.totalCommitsThisYear}
+              {loading ? '...' : stats?.totalCommitsThisYear !== null && stats?.totalCommitsThisYear !== undefined ? stats.totalCommitsThisYear : '—'}
             </div>
-            <p className="text-xs text-slate-500 dark:text-[#8A8A8E] font-mono">Production PRs & commits</p>
+            <p className="text-xs text-slate-500 dark:text-[#8A8A8E] font-mono">
+              GitHub contribution calendar
+            </p>
           </GlassCard>
         </motion.div>
 
         {/* Top Languages Card */}
         <motion.div variants={fadeInUp} className="lg:col-span-4">
           <GlassCard className="p-6 h-full space-y-4 relative">
-            {loading && <div className="absolute top-4 right-4"><Loader2 className="w-4 h-4 text-slate-500 dark:text-[#8A8A8E] animate-spin" /></div>}
+            {loading && (
+              <div className="absolute top-4 right-4">
+                <Loader2 className="w-4 h-4 text-slate-500 dark:text-[#8A8A8E] animate-spin" />
+              </div>
+            )}
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase font-medium">Language Distribution</span>
+              <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase font-medium">
+                Language Distribution
+              </span>
               <Code className="w-5 h-5 text-purple-500 dark:text-purple-400" />
             </div>
 
-            <div className="space-y-2">
-              {githubData.topLanguages.map((lang, idx) => (
-                <div key={idx} className="space-y-1">
-                  <div className="flex justify-between text-xs font-mono">
-                    <span className="text-slate-800 dark:text-[#F5F5F7] font-medium">{lang.name}</span>
-                    <span className="text-slate-500 dark:text-[#8A8A8E]">{lang.percentage}%</span>
+            {loading ? (
+              <p className="text-xs font-mono text-slate-500 dark:text-[#8A8A8E]">Loading languages...</p>
+            ) : stats && stats.topLanguages.length > 0 ? (
+              <div className="space-y-2">
+                {stats.topLanguages.map((lang, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="flex justify-between text-xs font-mono">
+                      <span className="text-slate-800 dark:text-[#F5F5F7] font-medium">{lang.name}</span>
+                      <span className="text-slate-500 dark:text-[#8A8A8E]">{lang.percentage}%</span>
+                    </div>
+                    <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/5 overflow-hidden">
+                      <div
+                        className="h-full rounded-full"
+                        style={{ width: `${lang.percentage}%`, backgroundColor: lang.color }}
+                      />
+                    </div>
                   </div>
-                  <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/5 overflow-hidden">
-                    <div
-                      className="h-full rounded-full"
-                      style={{ width: `${lang.percentage}%`, backgroundColor: lang.color }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-xs font-mono text-slate-500 dark:text-[#8A8A8E]">
+                Language data temporarily unavailable.
+              </p>
+            )}
           </GlassCard>
         </motion.div>
 
         {/* Contribution Heatmap Full Width */}
         <motion.div variants={fadeInUp} className="lg:col-span-12">
           <GlassCard className="p-6 md:p-8">
-            <ContributionHeatmap />
+            <ContributionHeatmap
+              days={stats?.contributionDays || []}
+              totalCommits={stats?.totalCommitsThisYear ?? null}
+              loading={loading}
+            />
           </GlassCard>
         </motion.div>
 
         {/* Latest Commits Feed */}
         <motion.div variants={fadeInUp} className="lg:col-span-12">
           <GlassCard className="p-6 md:p-8 space-y-4 relative">
-            {loading && <div className="absolute top-4 right-4"><Loader2 className="w-4 h-4 text-slate-500 dark:text-[#8A8A8E] animate-spin" /></div>}
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
               <span className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E] uppercase flex items-center gap-2 font-medium">
                 <GitCommit className="w-4 h-4 text-blue-600 dark:text-[#4F8CFF]" />
                 Recent Commit Activity Feed
               </span>
-              <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold">Synced via GitHub API</span>
+              <span className={`text-xs font-mono font-semibold ${stats?.isLive ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
+                {loading ? 'Syncing...' : stats?.isLive ? 'Synced via GitHub API' : 'GitHub API Rate-Limited'}
+              </span>
             </div>
 
-            <div className="space-y-3">
-              {githubData.latestCommits.map((commit, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-2 font-mono text-xs hover:border-blue-500/40 dark:hover:border-[#4F8CFF]/40 transition-colors shadow-sm dark:shadow-none"
+            {loading ? (
+              <div className="py-6 text-center text-xs font-mono text-slate-500 dark:text-[#8A8A8E] animate-pulse">
+                Fetching recent commits from GitHub...
+              </div>
+            ) : error || !stats || stats.latestCommits.length === 0 ? (
+              <div className="py-6 text-center space-y-2">
+                <p className="text-xs font-mono text-slate-600 dark:text-[#8A8A8E]">
+                  Unable to load recent commits right now.
+                </p>
+                <a
+                  href="https://github.com/guruvishnuk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-blue-600 dark:text-[#4F8CFF] hover:underline"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="px-2 py-0.5 rounded bg-blue-500/10 dark:bg-[#4F8CFF]/15 border border-blue-500/25 dark:border-[#4F8CFF]/30 text-blue-600 dark:text-[#4F8CFF] text-[10px] font-bold">
-                      {commit.sha}
+                  <span>View commit history on GitHub</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {stats.latestCommits.map((commit, idx) => (
+                  <div
+                    key={`${commit.sha}-${idx}`}
+                    className="p-3 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-2 font-mono text-xs hover:border-blue-500/40 dark:hover:border-[#4F8CFF]/40 transition-colors shadow-sm dark:shadow-none"
+                  >
+                    <div className="flex items-center gap-3">
+                      <a
+                        href={commit.url || `https://github.com/${commit.repo}/commit/${commit.sha}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2 py-0.5 rounded bg-blue-500/10 dark:bg-[#4F8CFF]/15 border border-blue-500/25 dark:border-[#4F8CFF]/30 text-blue-600 dark:text-[#4F8CFF] text-[10px] font-bold hover:underline"
+                      >
+                        {commit.sha}
+                      </a>
+                      <a
+                        href={`https://github.com/${commit.repo}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-900 dark:text-[#F5F5F7] font-semibold hover:text-blue-600 dark:hover:text-[#4F8CFF] transition-colors"
+                      >
+                        {commit.repo}
+                      </a>
+                    </div>
+                    <p className="text-slate-600 dark:text-[#8A8A8E] truncate max-w-md font-sans text-xs">
+                      {commit.message}
+                    </p>
+                    <span className="text-slate-500 dark:text-[#8A8A8E] text-[10px] whitespace-nowrap">
+                      {commit.date}
                     </span>
-                    <span className="text-slate-900 dark:text-[#F5F5F7] font-semibold">{commit.repo}</span>
                   </div>
-                  <p className="text-slate-600 dark:text-[#8A8A8E] truncate max-w-md font-sans text-xs">{commit.message}</p>
-                  <span className="text-slate-500 dark:text-[#8A8A8E] text-[10px] whitespace-nowrap">{commit.date}</span>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </GlassCard>
         </motion.div>
       </motion.div>

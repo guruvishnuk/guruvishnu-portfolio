@@ -107,9 +107,9 @@ export const AIChatWidget: React.FC = () => {
                     <Bot className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-[var(--theme-text-primary)]">AI Assistant</h3>
+                    <h3 className="text-sm font-bold text-[var(--theme-text-primary)]">Portfolio Assistant</h3>
                     <p className="text-[10px] text-blue-600 dark:text-[#4F8CFF] flex items-center gap-1 font-medium">
-                      <Sparkles className="w-3 h-3" /> Powered by Gemini
+                      <Sparkles className="w-3 h-3" /> Resume &amp; Project Guide
                     </p>
                   </div>
                 </div>

@@ -67,6 +67,7 @@ export interface CommitActivity {
   date: string;
   branch: string;
   sha: string;
+  url?: string;
 }
 
 export interface ProjectInquiryData {
